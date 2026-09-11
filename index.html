@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>timely 無料サンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ドン・キホーテ風の「わくわく」を狙った配色。
+   黒地に、黄みのオレンジ。値札は赤。密度は高め。
+   ただし、実在の店舗アプリの画面そのものは真似していない。
+   ========================================================= */
+:root {
+  --bg:      #121212;
+  --bg-2:    #1C1C1C;
+  --card:    #FFFFFF;
+  --ink:     #111111;          /* カード上の文字 */
+  --ink-dim: #6B6B6B;
+  --text:    #FFFFFF;          /* 地の上の文字 */
+  --text-dim:#BDBDBD;
+  --yel:     #FFB300;          /* 主役。黄みのオレンジ */
+  --yel-2:   #FFD54A;
+  --red:     #E60023;
+  --blue:    #1E6BFF;
+  --line:    #2A2A2A;
+  --tape:    repeating-linear-gradient(-45deg, #FFB300 0 14px, #111 14px 28px);
+}
+:root[data-mode="light"] {
+  --bg:      #FFF7DB;
+  --bg-2:    #FFF1C2;
+  --card:    #FFFFFF;
+  --ink:     #111111;
+  --ink-dim: #6B6B6B;
+  --text:    #111111;
+  --text-dim:#5A5A5A;
+  --line:    #F0DFA8;
+  --tape:    repeating-linear-gradient(-45deg, #FFB300 0 14px, #111 14px 28px);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font: 500 15px/1.65 "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--yel); outline-offset: 3px; }
+
+.pop  { font-family: "Reggae One", "Zen Kaku Gothic New", sans-serif; font-weight: 400; }
+.num  { font-family: "Dela Gothic One", "Zen Kaku Gothic New", sans-serif; font-weight: 400; }
+
+/* ---------- 断り ---------- */
+.note { background: #000; color: #EDE7DE; padding: 9px 16px; border-bottom: 3px solid var(--yel); }
+.note-in { max-width: 940px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.note p { margin: 0; font-size: 12px; line-height: 1.6; opacity: .85; }
+.note b { font-family: "Dela Gothic One"; font-size: 12px; letter-spacing: .1em; color: var(--yel); opacity: 1; }
+.modes { margin-left: auto; display: flex; gap: 2px; }
+.modes button { font-size: 12px; padding: 5px 13px; border-radius: 999px; opacity: .55; color: #EDE7DE; }
+.modes button[aria-pressed="true"] { opacity: 1; background: var(--yel); color: #111; font-weight: 900; }
+
+/* ---------- 枠 ---------- */
+.app { max-width: 940px; margin: 0 auto; padding: 0 14px 104px; container-type: inline-size; }
+.screen[hidden] { display: none; }
+
+/* ---------- ロゴ帯 ---------- */
+.brand {
+  margin: 12px -14px 0; padding: 10px 14px 12px;
+  background: var(--tape); position: relative;
+}
+.brand .inner {
+  background: var(--yel); color: #111; border-radius: 6px;
+  padding: 6px 16px; display: flex; align-items: baseline; gap: 12px;
+  transform: rotate(-1.2deg); box-shadow: 4px 4px 0 #111;
+}
+.brand .logo { font-size: 34px; line-height: 1.1; letter-spacing: .02em; }
+.brand .tag { font-size: 12px; font-weight: 900; }
+.brand .tag b { color: var(--red); }
+
+/* ---------- 検索 ---------- */
+.find { display: flex; gap: 10px; align-items: center; margin: 16px 0 6px; }
+.find .box {
+  flex: 1; display: flex; align-items: center; gap: 10px;
+  background: var(--card); color: var(--ink);
+  border: 3px solid #111; border-radius: 12px; padding: 11px 14px;
+  box-shadow: 4px 4px 0 var(--yel);
+}
+.find input { flex: 1; min-width: 0; border: 0; outline: none; background: none; color: inherit; font: inherit; font-weight: 700; }
+.find input::placeholder { color: var(--ink-dim); }
+.bell {
+  position: relative; width: 50px; height: 50px; flex: none;
+  background: var(--yel); color: #111; border: 3px solid #111; border-radius: 12px;
+  display: grid; place-items: center; box-shadow: 4px 4px 0 #111;
+}
+.bell .dot { position: absolute; top: -6px; right: -6px; width: 16px; height: 16px; border-radius: 50%; background: var(--red); border: 2px solid #fff; }
+.ico { width: 22px; height: 22px; display: block; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+.kinds { display: flex; gap: 8px; overflow-x: auto; padding: 14px 2px 8px; scrollbar-width: none; }
+.kinds::-webkit-scrollbar { display: none; }
+.kinds button {
+  white-space: nowrap; padding: 7px 14px; font-size: 13.5px; font-weight: 900;
+  background: var(--card); color: var(--ink); border: 2.5px solid #111; border-radius: 999px;
+}
+.kinds button[aria-pressed="true"] { background: var(--red); color: #fff; border-color: var(--red); transform: rotate(-2deg); }
+
+.sortline { display: flex; align-items: center; gap: 8px; padding: 4px 2px 12px; font-size: 12.5px; color: var(--text-dim); font-weight: 700; }
+.sticker {
+  display: inline-block; background: var(--yel); color: #111; font-size: 11px; font-weight: 900;
+  padding: 3px 9px; border-radius: 4px; transform: rotate(-3deg); border: 2px solid #111;
+}
+
+/* ---------- 一覧（メルカリ風の2列＋値札） ---------- */
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+@container (min-width: 620px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+.card { text-align: left; width: 100%; position: relative; }
+.card .shot {
+  position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden;
+  border: 3px solid #111; display: grid; place-items: center; background: var(--bg-2);
+}
+.card .shot span.e { font-size: 46px; }
+.card .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card .shot .dur {
+  position: absolute; left: -4px; bottom: 14px; background: var(--yel); color: #111;
+  font-size: 12px; font-weight: 900; padding: 3px 10px 3px 12px;
+  border: 2px solid #111; border-left: 0; border-radius: 0 6px 6px 0;
+}
+.tagprice {
+  position: absolute; right: -4px; bottom: 8px;
+  background: #fff; color: var(--red); border: 3px solid var(--red); border-radius: 6px;
+  padding: 1px 8px 0; transform: rotate(-5deg); box-shadow: 3px 3px 0 #111;
+  line-height: 1.05; text-align: center;
+}
+.tagprice .y { font-size: 17px; }
+.tagprice .p { font-size: 9px; color: #111; font-weight: 900; }
+.card .ttl { margin: 12px 2px 0; font-size: 13.5px; line-height: 1.45; font-weight: 700; }
+.card .foot { display: flex; align-items: center; gap: 7px; margin: 6px 2px 0; font-size: 12px; color: var(--text-dim); font-weight: 700; }
+.star { color: var(--yel); }
+
+/* ---------- 詳細 ---------- */
+.ribbon {
+  position: absolute; right: -8px; top: 14px; background: var(--red); color: #fff;
+  font-size: 12px; font-weight: 900; padding: 4px 12px; transform: rotate(6deg);
+  border: 2px solid #111; box-shadow: 3px 3px 0 #111;
+}
+
+.dtl-h h2 { margin: 6px 2px 4px; font-size: 22px; line-height: 1.45; }
+.pricebig {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  background: #fff; color: var(--red); border: 3px solid var(--red); border-radius: 8px;
+  padding: 4px 14px 2px; margin: 10px 0 2px; transform: rotate(-2deg); box-shadow: 4px 4px 0 #111;
+}
+.pricebig .y { font-size: 34px; line-height: 1; }
+.pricebig .per { font-size: 13px; color: #111; font-weight: 900; }
+
+.seller {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px;
+  padding: 12px 16px; margin: 18px 0 12px; box-shadow: 4px 4px 0 var(--yel);
+}
+.ava { width: 46px; height: 46px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 19px; color: #111; background: var(--yel); border: 2.5px solid #111; font-weight: 900; }
+.seller .nm { font-weight: 900; font-size: 15px; }
+.seller .sub2 { font-size: 12px; color: var(--ink-dim); font-weight: 700; }
+
+.block {
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px;
+  padding: 16px 18px; margin: 12px 0; position: relative;
+}
+.block h3 {
+  margin: -16px -18px 12px; padding: 7px 18px;
+  background: #111; color: var(--yel); font-size: 13px; letter-spacing: .08em;
+  border-radius: 10px 10px 0 0;
+}
+.block p { margin: 0; font-size: 14px; line-height: 1.85; font-weight: 500; }
+
+/* 地図 */
+.map { position: relative; height: 168px; border-radius: 10px; overflow: hidden; background: #F3EFE6; border: 2.5px solid #111; }
+.map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map .pin {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%,-100%);
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--red); color: #fff; border: 3px solid #111; box-shadow: 3px 3px 0 #111;
+}
+.map .me { position: absolute; left: 26%; top: 72%; width: 15px; height: 15px; border-radius: 50%; background: var(--blue); border: 3px solid #fff; box-shadow: 0 0 0 5px rgba(30,107,255,.25); }
+.maplabel { font-size: 11.5px; color: var(--ink-dim); margin: 8px 2px 0; font-weight: 700; }
+
+.rv { display: flex; gap: 12px; padding: 12px 0; border-bottom: 2px dashed #ddd; }
+.rv:last-child { border-bottom: 0; }
+.rv .who { font-size: 12.5px; font-weight: 900; }
+.rv .txt { font-size: 13.5px; line-height: 1.7; }
+
+/* ---------- 空いている時間（週の帯＋枠の一覧） ---------- */
+.avail-head { text-align: center; font-size: 13px; font-weight: 900; margin: 2px 0 10px; }
+.avail-head b { color: var(--red); }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 0 0 6px; }
+.week .d { display: grid; justify-items: center; gap: 4px; font-size: 11px; font-weight: 900; color: var(--ink-dim); padding: 0; min-width: 0; }
+.week .d .n {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  border: 2.5px solid #111; background: #fff; color: #111; font-size: 15px; font-family: "Dela Gothic One";
+}
+.week .d.sun .w { color: var(--red); }  .week .d.sat .w { color: var(--blue); }
+.week .d.on .n { background: var(--yel); box-shadow: 3px 3px 0 #111; transform: rotate(-4deg); }
+.week .d.off .n { background: #EEE; color: #BBB; border-color: #CCC; }
+.week .d .c { font-size: 10px; }
+.slots { display: grid; gap: 8px; margin-top: 12px; }
+.slot {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 9px 0; border-bottom: 2px dashed #ddd;
+}
+.slot:last-child { border-bottom: 0; }
+.slot .t { line-height: 1.25; }
+.slot .t small { display: block; font-size: 11px; color: var(--ink-dim); font-weight: 700; }
+.slot .t b { font-family: "Dela Gothic One"; font-weight: 400; font-size: 17px; }
+.slot .go {
+  flex: none; background: var(--yel); color: #111; border: 2.5px solid #111; border-radius: 8px;
+  padding: 8px 12px; font-size: 12.5px; font-weight: 900; box-shadow: 3px 3px 0 #111;
+}
+.more { width: 100%; text-align: center; padding: 10px; font-weight: 900; color: var(--red); font-size: 13.5px; }
+.picked {
+  display: flex; align-items: center; gap: 10px; background: #FFF6D6; border: 2.5px dashed var(--yel);
+  border-radius: 10px; padding: 10px 12px; margin: 0 0 12px; font-weight: 900; color: #111;
+}
+.picked .num { font-size: 18px; }
+
+/* ---------- さがすの切り替え（近い順／カテゴリごと） ---------- */
+.viewtabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 14px 0 4px; border: 3px solid #111; border-radius: 12px; overflow: hidden; background: #fff; }
+.viewtabs button { padding: 10px; font-size: 14px; font-weight: 900; color: #111; background: #fff; }
+.viewtabs button[aria-selected="true"] { background: #111; color: var(--yel); }
+.catsec { margin: 18px 0 8px; }
+.catsec .h { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
+.catsec .h .t { font-size: 20px; flex: 1; }
+.catsec .h .ic-btn { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: #111; border: 2.5px solid #111; display: grid; place-items: center; font-weight: 900; }
+.mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 8px; }
+.mosaic .m { position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; border: 3px solid #111; text-align: left; padding: 0; background: var(--bg-2); }
+.mosaic .m.big { grid-column: span 2; grid-row: span 2; }
+.mosaic .m img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mosaic .m .pr {
+  position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.72); color: #fff;
+  font-family: "Dela Gothic One"; font-size: 13px; padding: 3px 9px; border-radius: 999px;
+}
+.mosaic .m.big .pr { font-size: 16px; padding: 5px 12px; }
+.mosaic .m .new {
+  position: absolute; left: -26px; top: 10px; width: 100px; transform: rotate(-45deg);
+  background: var(--blue); color: #fff; font-size: 10px; font-weight: 900; text-align: center; padding: 3px 0;
+}
+.mosaic .m .hot { background: #C41BB0; }
+
+/* ---------- 詳細：スライダー ---------- */
+.slider { position: relative; margin: 8px 0 8px; border-radius: 16px; border: 3px solid #111; overflow: hidden; background: var(--bg-2); }
+.slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.slides::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; aspect-ratio: 1 / 1; scroll-snap-align: start; display: grid; place-items: center; font-size: 96px; background: var(--bg-2); }
+.slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slider .count {
+  position: absolute; right: 12px; bottom: 12px; background: rgba(0,0,0,.72); color: #fff;
+  font-family: "Dela Gothic One"; font-size: 12px; padding: 4px 10px; border-radius: 999px;
+}
+.thumbs { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; }
+.thumbs::-webkit-scrollbar { display: none; }
+.thumbs button {
+  flex: 0 0 64px; height: 64px; border-radius: 10px; border: 3px solid #111; background: #fff;
+  display: grid; place-items: center; font-size: 26px; overflow: hidden; padding: 0; opacity: .55;
+}
+.thumbs button img { width: 100%; height: 100%; object-fit: cover; }
+.thumbs button.on { opacity: 1; border-color: var(--red); box-shadow: 0 0 0 2px var(--red) inset; }
+
+/* ---------- タグ入力 ---------- */
+.tagbox { position: relative; }
+.tagwrap {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  background: #FFFDF6; border: 2.5px solid #111; border-radius: 10px; padding: 8px 10px; min-height: 48px;
+}
+.field .tagwrap input { flex: 1; width: auto; min-width: 120px; border: 0; outline: none; background: none; font: inherit; font-weight: 700; color: #111; padding: 4px 2px; box-shadow: none; border-radius: 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--yel); color: #111;
+  border: 2px solid #111; border-radius: 999px; padding: 3px 6px 3px 10px; font-size: 13px; font-weight: 900;
+}
+.chip button { width: 20px; height: 20px; border-radius: 50%; background: #111; color: #fff; font-size: 12px; line-height: 1; display: grid; place-items: center; padding: 0; }
+.suggest {
+  position: absolute; left: 0; right: 0; top: 100%; z-index: 20; margin-top: 6px;
+  background: #fff; color: #111; border: 3px solid #111; border-radius: 12px; box-shadow: 4px 4px 0 #111; overflow: hidden;
+}
+.suggest[hidden] { display: none; }
+.suggest .hd { font-size: 11px; font-weight: 900; color: #666; padding: 8px 12px 4px; letter-spacing: .06em; }
+.suggest button { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 9px 12px; font-size: 14px; font-weight: 700; color: #111; border-top: 1px solid #EEE; }
+.suggest button .hash { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #111; display: grid; place-items: center; font-size: 12px; font-weight: 900; flex: none; }
+.suggest button .n { margin-left: auto; font-size: 11px; color: #888; font-weight: 700; }
+.suggest button:hover, .suggest button:focus-visible { background: #FFF6D6; }
+.tagnote { font-size: 11.5px; color: var(--ink-dim); font-weight: 700; margin: 6px 2px 0; }
+
+/* ---------- 空き時間のカレンダー ---------- */
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin: 0 0 8px; }
+.cal-nav button { font-size: 12.5px; font-weight: 900; color: var(--red); padding: 6px 4px; }
+.cal-nav .ym { font-family: "Dela Gothic One"; font-size: 14px; }
+.cal { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
+.cal th, .cal td { text-align: center; padding: 0; }
+.cal th { font-size: 11px; font-weight: 900; color: #111; height: 40px; border-radius: 8px; background: #F3EFE6; cursor: pointer; }
+.cal th .d { font-family: "Dela Gothic One"; font-size: 15px; display: block; line-height: 1.1; }
+.cal th.sun { color: var(--red); } .cal th.sat { color: var(--blue); }
+.cal th.off { background: #E5E5E5; color: #999; }
+.cal td.t { font-size: 11.5px; font-weight: 900; color: #111; text-align: right; padding-right: 4px; width: 44px; }
+.cal td.c { height: 30px; }
+.cal td.c button {
+  width: 100%; height: 30px; border-radius: 7px; display: grid; place-items: center;
+  font-size: 15px; font-weight: 900; background: #fff; border: 2px solid #111; color: #111;
+}
+.cal td.c button.on { background: var(--yel); }
+.cal td.c button.off { background: #EEE; color: #BBB; border-color: #DDD; }
+.cal-legend { display: flex; gap: 14px; font-size: 11.5px; font-weight: 700; color: var(--ink-dim); margin: 8px 2px 0; }
+.cal-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 2px solid #111; vertical-align: -2px; margin-right: 4px; background: var(--yel); }
+.cal-legend i.x { background: #EEE; border-color: #DDD; }
+
+/* ---------- マイページ（メニュー） ---------- */
+.me-head { display: grid; justify-items: center; gap: 10px; padding: 18px 0 20px; }
+.me-head .big { width: 96px; height: 96px; border-radius: 50%; background: var(--yel); border: 3px solid #111; display: grid; place-items: center; font-size: 40px; font-weight: 900; color: #111; box-shadow: 4px 4px 0 #111; }
+.me-head .nm { font-size: 22px; }
+.me-head .sub { font-size: 12px; color: var(--text-dim); font-weight: 700; margin-top: -6px; }
+.menu { background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px; overflow: hidden; box-shadow: 4px 4px 0 var(--yel); }
+.menu button { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 15px 16px; font-size: 15px; font-weight: 900; color: #111; }
+.menu button + button { border-top: 2px dashed #ddd; }
+.menu .mi { width: 34px; height: 34px; border-radius: 10px; background: var(--yel); border: 2.5px solid #111; display: grid; place-items: center; flex: none; }
+.menu .mi .ico { width: 18px; height: 18px; }
+.menu .cnt { margin-left: auto; font-size: 12px; color: var(--ink-dim); font-weight: 700; }
+.menu .cv { color: #999; font-weight: 900; }
+.menu .cnt + .cv { margin-left: 0; }
+.menu button > .cv:last-child:not(.cnt + .cv) { margin-left: auto; }
+.ok-badge { display: inline-flex; align-items: center; gap: 6px; background: #E6F7EC; color: #1B9C5A; border: 2.5px solid #1B9C5A; border-radius: 999px; padding: 4px 12px; font-size: 12.5px; font-weight: 900; }
+.danger { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.danger button { padding: 13px; border-radius: 12px; font-weight: 900; font-size: 14px; border: 3px solid #111; background: #fff; color: #111; box-shadow: 3px 3px 0 #111; }
+.danger button.quit { background: #fff; color: var(--red); border-color: var(--red); box-shadow: 3px 3px 0 var(--red); }
+.sales-big { text-align: center; padding: 6px 0 10px; }
+.sales-big .v { font-family: "Dela Gothic One"; font-size: 40px; color: var(--red); line-height: 1.1; }
+.sales-big .l { font-size: 12px; font-weight: 900; color: var(--ink-dim); }
+.terms-ph { background: #FFFDF6; border: 2.5px dashed #111; border-radius: 10px; padding: 28px 16px; text-align: center; font-weight: 900; color: #666; }
+
+/* ---------- お知らせ ---------- */
+.notices { display: grid; gap: 10px; }
+.notice {
+  display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: start; text-align: left;
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px; padding: 12px 14px;
+  box-shadow: 4px 4px 0 var(--yel);
+}
+.notice > div:first-child { min-width: 0; }
+.notice .kind { font-size: 10.5px; font-weight: 900; padding: 2px 8px; border-radius: 999px; border: 2px solid #111; background: var(--yel); color: #111; display: inline-block; margin-bottom: 4px; }
+.notice .kind.imp { background: var(--red); color: #fff; }
+.notice .kind.info { background: #fff; }
+.notice .ti { font-weight: 900; font-size: 14.5px; line-height: 1.5; }
+.notice .ex { font-size: 12.5px; color: var(--ink-dim); font-weight: 500; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.notice .dt { font-size: 11px; color: var(--ink-dim); font-weight: 700; white-space: nowrap; }
+.notice .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); justify-self: end; margin-top: 4px; }
+.notice.read { box-shadow: 4px 4px 0 #444; }
+.notice.read .ti { font-weight: 700; }
+.article .dt { font-size: 12px; color: var(--text-dim); font-weight: 700; margin: 0 2px 10px; }
+.article .body p { margin: 0 0 12px; }
+
+/* ---------- 設定 ---------- */
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
+.setting-row .l { font-weight: 900; font-size: 15px; }
+.setting-row .l small { display: block; font-size: 11.5px; color: var(--ink-dim); font-weight: 700; }
+.seg2 { display: grid; grid-template-columns: 1fr 1fr; border: 3px solid #111; border-radius: 12px; overflow: hidden; background: #fff; }
+.seg2 button { padding: 12px; font-size: 14px; font-weight: 900; color: #111; background: #fff; }
+.seg2 button[aria-pressed="true"] { background: #111; color: var(--yel); }
+.swatch { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.swatch div { border: 3px solid #111; border-radius: 12px; padding: 12px; text-align: center; font-weight: 900; font-size: 12px; }
+.swatch .b { background: #121212; color: #FFB300; }
+.swatch .w { background: #FFF7DB; color: #111; }
+
+/* ---------- 取引の進み（パンチ穴） ---------- */
+.punch { list-style: none; display: flex; margin: 0; padding: 0; }
+.punch li { flex: 1; text-align: center; font-size: 11px; font-weight: 900; color: var(--text-dim); position: relative; padding-top: 24px; }
+.punch li::before { content: ""; position: absolute; top: 9px; left: -50%; width: 100%; height: 3px; background: #444; }
+.punch li:first-child::before { display: none; }
+.punch li::after {
+  content: ""; position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+  width: 18px; height: 18px; border-radius: 50%; background: var(--bg); border: 3px solid #444;
+}
+.punch li.done { color: var(--text); }
+.punch li.done::before { background: var(--yel); }
+.punch li.done::after { background: var(--yel); border-color: var(--yel); box-shadow: inset 0 0 0 3px #111; }
+.punch li.now { color: var(--yel); }
+.punch li.now::before { background: var(--yel); }
+.punch li.now::after { background: var(--red); border-color: var(--yel); box-shadow: inset 0 0 0 3px #111; }
+:root[data-mode="light"] .punch li::before { background: #D8CDA8; }
+:root[data-mode="light"] .punch li::after { border-color: #D8CDA8; }
+
+/* ---------- 取引の一覧（LINE風） ---------- */
+.deals { display: grid; gap: 10px; }
+.deal {
+  display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; text-align: left;
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px; padding: 12px 14px;
+  box-shadow: 4px 4px 0 var(--yel);
+}
+.deal .ava { width: 54px; height: 54px; font-size: 22px; }
+.deal > div:nth-child(2) { min-width: 0; }
+.deal .nm { font-weight: 900; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.deal .st { font-size: 10.5px; font-weight: 900; padding: 2px 8px; border-radius: 999px; border: 2px solid #111; background: var(--yel); color: #111; }
+.deal .st.done { background: #E8E8E8; color: #555; border-color: #999; }
+.deal .st.paid { background: var(--blue); color: #fff; border-color: #111; }
+.deal .tk { font-size: 11.5px; color: var(--ink-dim); font-weight: 700; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.deal .last { font-size: 13px; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.deal .right { display: grid; justify-items: end; gap: 6px; }
+.deal .time { font-size: 11px; color: var(--ink-dim); font-weight: 700; }
+.deal .unread { min-width: 22px; height: 22px; border-radius: 999px; background: var(--red); color: #fff; font-size: 12px; font-weight: 900; display: grid; place-items: center; padding: 0 6px; }
+
+/* ---------- チャットの詳細 ---------- */
+.chat-head {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0 10px; border-bottom: 3px solid var(--yel); margin-bottom: 10px;
+}
+.chat-head .back { padding: 6px 4px; }
+.chat-head .who { flex: 1; min-width: 0; }
+.chat-head .nm { font-weight: 900; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.chat-head .tk { font-size: 11.5px; color: var(--text-dim); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-strip {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 12px; padding: 10px 14px; margin: 0 0 12px;
+}
+.chat-strip .when { font-size: 12.5px; font-weight: 900; }
+.chat-strip .when small { display: block; font-size: 11px; color: var(--ink-dim); font-weight: 700; }
+.chat-strip .done-btn { background: var(--red); color: #fff; border: 2.5px solid #111; border-radius: 9px; padding: 8px 12px; font-size: 12.5px; font-weight: 900; box-shadow: 3px 3px 0 #111; white-space: nowrap; }
+.msgs { display: grid; gap: 10px; padding: 6px 0 14px; }
+.day { text-align: center; font-size: 11px; font-weight: 900; color: var(--text-dim); margin: 6px 0; }
+.day span { background: rgba(128,128,128,.25); padding: 3px 12px; border-radius: 999px; }
+.msg { display: flex; align-items: flex-end; gap: 8px; max-width: 86%; }
+.msg.me { margin-left: auto; flex-direction: row-reverse; }
+.msg .ava { width: 32px; height: 32px; font-size: 13px; flex: none; }
+.msg .bub {
+  padding: 10px 13px; font-size: 14px; line-height: 1.7; font-weight: 500;
+  background: #fff; color: #111; border: 2.5px solid #111; border-radius: 14px 14px 14px 4px;
+}
+.msg.me .bub { background: var(--yel); border-radius: 14px 14px 4px 14px; }
+.msg .meta { font-size: 10.5px; color: var(--text-dim); font-weight: 700; white-space: nowrap; }
+.msg.me .meta { text-align: right; }
+.msg.sys { max-width: 100%; justify-content: center; }
+.msg.sys .bub { background: #111; color: var(--yel); border-color: var(--yel); font-size: 12.5px; font-weight: 900; border-radius: 10px; text-align: center; }
+.chatbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #111; border-top: 4px solid var(--yel);
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+}
+.chatbar[hidden] { display: none; }
+.chatbar-in { max-width: 940px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.chatbar .inp { flex: 1; background: #fff; color: #111; border: 3px solid #111; border-radius: 12px; padding: 11px 14px; font-weight: 700; display: flex; align-items: center; }
+.chatbar .inp span { color: #999; font-weight: 500; }
+.chatbar .send { width: 48px; height: 48px; border-radius: 12px; background: var(--yel); border: 3px solid #111; display: grid; place-items: center; box-shadow: 3px 3px 0 #fff; color: #111; }
+
+/* ---------- 出品者の簡単なプロフィール（詳細内） ---------- */
+.hostcard {
+  background: var(--card); color: var(--ink); border: 3px solid #111; border-radius: 14px;
+  padding: 14px 16px; margin: 18px 0 12px; box-shadow: 4px 4px 0 var(--yel); text-align: left; width: 100%;
+}
+.hostcard .top { display: flex; align-items: center; gap: 12px; }
+.hostcard .nm { font-weight: 900; font-size: 15px; }
+.hostcard .nm small { font-weight: 700; color: var(--ink-dim); margin-left: 6px; font-size: 12px; }
+.hostcard .meta { font-size: 11.5px; color: var(--ink-dim); font-weight: 700; margin-top: 2px; }
+.hostcard .meta .ok { color: #1B9C5A; }
+.hostcard .intro { font-size: 13px; line-height: 1.75; margin: 10px 0 6px; font-weight: 500;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hostcard .go { font-size: 12.5px; font-weight: 900; color: var(--red); }
+
+/* ---------- 出品者の画面 ---------- */
+.hosthead { display: grid; grid-template-columns: 84px 1fr; gap: 14px; align-items: start; margin: 6px 0 14px; }
+.hosthead .big { width: 84px; height: 84px; border-radius: 50%; background: var(--yel); border: 3px solid #111; display: grid; place-items: center; font-size: 34px; font-weight: 900; color: #111; box-shadow: 4px 4px 0 #111; }
+.hosthead h2 { margin: 0; font-size: 21px; line-height: 1.3; }
+.hosthead h2 small { display: block; font-family: "Zen Kaku Gothic New"; font-size: 12.5px; font-weight: 700; color: var(--text-dim); margin-top: 2px; }
+.hosthead .meta { font-size: 11.5px; color: var(--text-dim); font-weight: 700; margin-top: 6px; line-height: 1.8; }
+.hosthead .meta .ok { color: #3BD37E; }
+.actions { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px; margin: 4px 0 14px; }
+.actions button {
+  padding: 10px 6px; font-size: 13px; font-weight: 900; border-radius: 10px;
+  background: #fff; color: #111; border: 2.5px solid #111; box-shadow: 3px 3px 0 #111;
+}
+.actions button.follow { background: var(--yel); }
+.actions button.follow.on { background: var(--red); color: #fff; border-color: var(--red); }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 0 0 14px; }
+.stats div { background: var(--bg-2); border: 2px solid var(--line); border-radius: 10px; padding: 8px 4px; text-align: center; }
+:root[data-mode="light"] .stats div { background: #fff; border-color: #E8D8A0; }
+.stats .v { font-family: "Dela Gothic One"; font-size: 17px; line-height: 1.2; }
+.stats .l { font-size: 10.5px; font-weight: 700; color: var(--text-dim); }
+.minirow { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: none; }
+.minirow::-webkit-scrollbar { display: none; }
+.mini {
+  flex: none; width: 150px; text-align: left; background: #fff; color: #111;
+  border: 2.5px solid #111; border-radius: 12px; overflow: hidden; box-shadow: 3px 3px 0 var(--yel); padding: 0;
+}
+.mini .sh { height: 92px; display: grid; place-items: center; font-size: 36px; background: #F6F1E3; border-bottom: 2.5px solid #111; overflow: hidden; }
+.mini .sh img { width: 100%; height: 100%; object-fit: cover; }
+.mini .b { padding: 8px 10px 10px; }
+.mini .t { font-size: 12px; font-weight: 700; line-height: 1.4; height: 34px; overflow: hidden; }
+.mini .y { font-family: "Dela Gothic One"; color: var(--red); font-size: 15px; margin-top: 4px; }
+.mini .y small { font-family: "Zen Kaku Gothic New"; font-weight: 900; color: #111; font-size: 10px; }
+.rv time { margin-left: auto; font-size: 11px; color: var(--ink-dim); font-weight: 700; white-space: nowrap; }
+.rv .body { flex: 1; }
+.rv .for { font-size: 11px; color: var(--ink-dim); font-weight: 700; margin-top: 3px; }
+
+/* ---------- 入力フォーム（出品・プロフィール） ---------- */
+.field { display: block; margin-top: 14px; }
+.field > span { display: block; font-size: 12px; font-weight: 900; margin-bottom: 6px; }
+.field > span b { color: var(--red); margin-left: 6px; font-size: 10.5px; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: 11px 13px; font: inherit; font-weight: 700; color: #111;
+  background: #FFFDF6; border: 2.5px solid #111; border-radius: 10px; outline: none;
+}
+.field input:focus, .field textarea:focus, .field select:focus { box-shadow: 3px 3px 0 var(--yel); }
+.field input::placeholder, .field textarea::placeholder { color: #AAA; font-weight: 500; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.photos .ph { aspect-ratio: 1/1; border: 2.5px dashed #111; border-radius: 10px; display: grid; place-items: center; font-size: 11px; font-weight: 900; color: #666; background: #FFFDF6; text-align: center; line-height: 1.3; }
+.photos .ph.main { grid-column: 1 / 3; grid-row: 1 / 3; font-size: 13px; }
+.photos .ph.has { border-style: solid; background: #F6F1E3; font-size: 30px; }
+.days { display: flex; gap: 6px; flex-wrap: wrap; }
+.days label { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 900; padding: 6px 10px; border: 2.5px solid #111; border-radius: 999px; background: #fff; color: #111; }
+.days input { width: auto; margin: 0; accent-color: var(--red); }
+.submit {
+  display: block; width: 100%; margin-top: 18px; padding: 15px; border-radius: 12px;
+  background: var(--red); color: #fff; border: 3px solid #111; box-shadow: 4px 4px 0 #111;
+  font-size: 17px; text-align: center;
+}
+.submit.yel { background: var(--yel); color: #111; }
+.avatarpick { display: flex; align-items: center; gap: 14px; }
+.avatarpick .big { width: 74px; height: 74px; border-radius: 50%; background: var(--yel); border: 3px solid #111; display: grid; place-items: center; font-size: 30px; font-weight: 900; color: #111; flex: none; }
+.avatarpick button { padding: 9px 14px; border: 2.5px solid #111; border-radius: 10px; background: #fff; color: #111; font-weight: 900; font-size: 13px; box-shadow: 3px 3px 0 #111; }
+
+/* ---------- 固定の購入バー ---------- */
+.buybar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  background: #111; border-top: 4px solid var(--yel);
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+}
+.buybar-in { max-width: 940px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.bigbtn {
+  flex: 1; border-radius: 12px; padding: 15px; color: #111; background: var(--yel);
+  font-size: 17px; letter-spacing: .04em; text-align: center; border: 3px solid #111;
+  box-shadow: 4px 4px 0 #fff;
+}
+.bigbtn.red { background: var(--red); color: #fff; }
+.bigbtn.quiet { background: #fff; color: #111; flex: none; padding: 15px 20px; box-shadow: none; }
+
+/* ---------- 購入 ---------- */
+.row { display: flex; justify-content: space-between; gap: 14px; padding: 10px 0; font-size: 14px; font-weight: 700; }
+.row + .row { border-top: 2px dashed #ddd; }
+.row .k { color: var(--ink-dim); }
+.row.total { border-top: 3px solid #111; margin-top: 6px; padding-top: 14px; font-size: 18px; }
+.row.total .v { color: var(--red); font-size: 26px; line-height: 1; }
+.paypay {
+  display: flex; align-items: center; gap: 12px;
+  background: #fff; border: 3px solid var(--red); border-radius: 12px; padding: 14px 16px; margin: 12px 0 6px;
+  box-shadow: 4px 4px 0 #111;
+}
+.pplogo { width: 48px; height: 48px; border-radius: 12px; flex: none; background: #FF0033; color: #FFF; display: grid; place-items: center; font-weight: 900; font-size: 11px; }
+.check { color: var(--red); font-weight: 900; margin-left: auto; font-size: 20px; }
+
+/* ---------- 下タブ ---------- */
+nav.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #111; border-top: 4px solid var(--yel);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+nav.tabs[hidden], .buybar[hidden] { display: none; }
+nav.tabs button { padding: 9px 2px 10px; font-size: 10.5px; font-weight: 900; color: #9A9A9A; display: grid; gap: 3px; justify-items: center; }
+nav.tabs button[aria-selected="true"] { color: var(--yel); }
+nav.tabs .ico { width: 23px; height: 23px; }
+
+.back { display: inline-flex; align-items: center; gap: 6px; padding: 12px 2px; font-weight: 900; font-size: 14px; color: var(--text); }
+.hint { font-size: 11.5px; color: var(--text-dim); padding: 12px 4px 0; line-height: 1.8; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="note">
+  <div class="note-in">
+    <b>SAMPLE</b>
+    <p>無料サンプルです。動くのは画面の移動だけで、実際のお支払いや会員登録は行われません。文言と金額は仮のものです。</p>
+    <div class="modes" role="group" aria-label="配色">
+      <button type="button" data-mode="dark" aria-pressed="true">ブラック</button>
+      <button type="button" data-mode="light" aria-pressed="false">ホワイト</button>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+
+  <!-- ============ さがす ============ -->
+  <section class="screen" id="find">
+    <div class="brand">
+      <div class="inner">
+        <span class="logo pop">timely</span>
+        <span class="tag">自分の時間を、売ろう。<b>30分から</b></span>
+      </div>
+    </div>
+
+    <div class="find">
+      <div class="box">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input placeholder="何を探す？" aria-label="何を探す？">
+      </div>
+      <div class="bell">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 6-3 7-3 7h18s-3-1-3-7"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="kinds" role="group" aria-label="カテゴリ">
+      <button type="button" aria-pressed="true">すべて</button>
+      <button type="button" aria-pressed="false">話し相手</button>
+      <button type="button" aria-pressed="false">相談</button>
+      <button type="button" aria-pressed="false">教える</button>
+      <button type="button" aria-pressed="false">作業</button>
+      <button type="button" aria-pressed="false">その他</button>
+    </div>
+
+    <div class="viewtabs" role="tablist" aria-label="並べ方">
+      <button role="tab" aria-selected="true" data-view="near">近い順</button>
+      <button role="tab" aria-selected="false" data-view="cat">カテゴリごと</button>
+    </div>
+
+    <div id="view-near">
+      <div class="sortline">
+        <span class="sticker">近い順</span>
+        現在地から近い方を先に表示しています
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+
+    <div id="view-cat" hidden></div>
+
+    <p class="hint">カテゴリの名前は仮のものです。実際に扱われる内容が固まりましたら入れ替えます。<br>
+      距離は、現在地と出品者様がご指定になった場所から計算します。</p>
+  </section>
+
+  <!-- ============ 詳細 ============ -->
+  <section class="screen" id="item" hidden>
+    <button class="back" data-go="find">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+
+    <div class="slider">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="img/t1_main.png" alt=""></div>
+        <div class="slide">🌇</div>
+        <div class="slide">🪑</div>
+        <div class="slide">🗺️</div>
+        <div class="slide">📚</div>
+        <div class="slide">🍰</div>
+      </div>
+      <span class="ribbon">★4.8　人気</span>
+      <span class="count" id="slide-count">1 / 6</span>
+    </div>
+    <div class="thumbs" id="thumbs">
+      <button type="button" class="on" data-slide="0"><img src="img/t1.png" alt=""></button>
+      <button type="button" data-slide="1">🌇</button>
+      <button type="button" data-slide="2">🪑</button>
+      <button type="button" data-slide="3">🗺️</button>
+      <button type="button" data-slide="4">📚</button>
+      <button type="button" data-slide="5">🍰</button>
+    </div>
+
+    <div class="dtl-h"><h2 class="pop">30分、なんでもない話をしませんか</h2></div>
+    <div class="pricebig"><span class="y num">¥1,500</span><span class="per">/ 30分</span></div>
+    <div class="sortline" style="padding-top:12px">
+      <span class="star">★ 4.8</span>（32件）　　<span class="sticker" style="transform:none">1.2km</span>　　渋谷区
+    </div>
+
+    <button class="hostcard" data-go="host">
+      <div class="top">
+        <div class="ava">桜</div>
+        <div>
+          <div class="nm">さくら<small>｜話し相手・きき役</small></div>
+          <div class="meta"><span class="star">★★★★★ 4.8</span>（32）　<span class="ok">✔ 本人確認済</span></div>
+          <div class="meta">最終ログイン：2日前　渋谷区</div>
+        </div>
+      </div>
+      <div class="intro">はじめまして、さくらです。カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。</div>
+      <div class="go">出品者のページを見る ▸</div>
+    </button>
+
+    <div class="block" id="avail-item">
+      <h3 class="pop">空いている時間</h3>
+      <div class="avail-head">日程の調整は不要です。<b>空いている枠から選んで</b>そのまま購入できます</div>
+      <div class="week" data-week></div>
+      <div class="slots" data-slots data-limit="4"></div>
+      <button class="more" data-go="when">ほかの時間も見る ▾</button>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">内容</h3>
+      <p>喫茶店で30分、ゆっくりお話しします。<br>
+        仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。<br>
+        待ち合わせの場所と時間は、ご購入のあとメッセージで決めさせてください。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">待ち合わせのあたり</h3>
+      <div class="map">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
+          <g stroke="#111" stroke-opacity=".16" stroke-width="9" fill="none">
+            <path d="M-10 60 H410"/><path d="M-10 140 H410"/>
+            <path d="M90 -10 V210"/><path d="M250 -10 V210"/><path d="M330 -10 V210"/>
+          </g>
+          <g fill="#111" fill-opacity=".07">
+            <rect x="105" y="72" width="130" height="55" rx="6"/>
+            <rect x="265" y="72" width="50" height="55" rx="6"/>
+            <rect x="105" y="152" width="130" height="40" rx="6"/>
+          </g>
+        </svg>
+        <div class="pin">
+          <svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z"/></svg>
+        </div>
+        <div class="me" title="現在地"></div>
+      </div>
+      <p class="maplabel">出品者様がご指定になった場所と、現在地のみを表示します。ご自宅など、ご指定のない場所は表示いたしません。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">レビュー　★4.8（32件）</h3>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">り</div>
+        <div><div class="who">りく　<span class="star">★★★★★</span></div>
+        <div class="txt">話しやすくて、あっという間の30分でした。</div></div></div>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">あ</div>
+        <div><div class="who">あおい　<span class="star">★★★★★</span></div>
+        <div class="txt">待ち合わせもスムーズでした。また会いたいです。</div></div></div>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">ゆ</div>
+        <div><div class="who">ゆい　<span class="star">★★★★</span>☆</div>
+        <div class="txt">緊張しましたが、優しく聞いてくださいました。</div></div></div>
+    </div>
+
+    <p class="hint">上の大きな画像は横にスライドできます。下の小さな画像を押すと、その画像に切り替わります。<br>
+      詳しい条件は、ご購入のあとのメッセージでやり取りしていただく形です。</p>
+  </section>
+
+  <!-- ============ 日程を選ぶ ============ -->
+  <section class="screen" id="when" hidden>
+    <button class="back" data-go="item">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+
+    <h2 class="pop" style="font-size:24px;margin:6px 2px 4px">日程を選ぶ</h2>
+    <div class="sortline" style="padding:0 2px 12px">30分、なんでもない話をしませんか　<span class="num" style="color:var(--yel)">¥1,500</span> / 30分</div>
+
+    <div class="block">
+      <h3 class="pop">空いている時間</h3>
+      <div class="avail-head">日にちを選ぶと、その日の空き枠が並びます</div>
+      <div class="week" data-week></div>
+      <div class="slots" data-slots></div>
+    </div>
+
+    <p class="hint">枠の「購入画面に進む」を押すと、その時間で購入の確認に進みます。</p>
+  </section>
+
+  <!-- ============ 出品者の画面 ============ -->
+  <section class="screen" id="host" hidden>
+    <button class="back" data-go="item">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+
+    <div class="hosthead">
+      <div class="big">桜</div>
+      <div>
+        <h2 class="pop">さくら<small>話し相手・きき役</small></h2>
+        <div class="meta"><span class="star">★★★★★ 4.8</span>（32件）　<span class="ok">✔ 本人確認済</span><br>最終ログイン：2日前　　渋谷区</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="follow" id="followbtn">＋ フォロー</button>
+      <button type="button" data-sample-msg="ブロックすると、この出品者の券が一覧に出なくなります。">⊘ ブロック</button>
+      <button type="button" data-sample-msg="通報は運営に届きます。内容を確認して対応します。">⚑ 通報</button>
+    </div>
+
+    <div class="stats">
+      <div><div class="v">3</div><div class="l">出品中</div></div>
+      <div><div class="v">32</div><div class="l">取引</div></div>
+      <div><div class="v">118</div><div class="l">フォロワー</div></div>
+      <div><div class="v">4.8</div><div class="l">評価</div></div>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">自己紹介</h3>
+      <p>はじめまして、さくらです。<br>
+        カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。<br>
+        聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。<br>
+        渋谷・新宿・下北沢のあたりでお会いできます。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">出品中の券</h3>
+      <div class="minirow">
+        <button class="mini" data-go="item"><div class="sh"><img src="img/t1.png" alt=""></div><div class="b"><div class="t">30分、なんでもない話をしませんか</div><div class="y">¥1,500<small> / 30分</small></div></div></button>
+        <button class="mini" data-go="item"><div class="sh"><img src="img/t3.png" alt=""></div><div class="b"><div class="t">本屋を一緒にまわりましょう</div><div class="y">¥2,000<small> / 60分</small></div></div></button>
+        <button class="mini" data-go="item"><div class="sh">🍰</div><div class="b"><div class="t">甘いものを食べながら近況報告</div><div class="y">¥1,800<small> / 45分</small></div></div></button>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">レビュー　32件（新しい順）</h3>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">り</div>
+        <div class="body"><div class="who">りく　<span class="star">★★★★★</span></div>
+        <div class="txt">話しやすくて、あっという間の30分でした。</div>
+        <div class="for">30分、なんでもない話をしませんか</div></div><time>9/9</time></div>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">あ</div>
+        <div class="body"><div class="who">あおい　<span class="star">★★★★★</span></div>
+        <div class="txt">待ち合わせもスムーズでした。また会いたいです。</div>
+        <div class="for">本屋を一緒にまわりましょう</div></div><time>9/6</time></div>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">ゆ</div>
+        <div class="body"><div class="who">ゆい　<span class="star">★★★★</span>☆</div>
+        <div class="txt">緊張しましたが、優しく聞いてくださいました。</div>
+        <div class="for">30分、なんでもない話をしませんか</div></div><time>9/2</time></div>
+      <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">け</div>
+        <div class="body"><div class="who">けん　<span class="star">★★★★★</span></div>
+        <div class="txt">ケーキが美味しいお店を教えてもらえました。</div>
+        <div class="for">甘いものを食べながら近況報告</div></div><time>8/30</time></div>
+      <button class="more" type="button" data-sample-msg="サンプルでは4件まで表示しています。">もっと見る ▾</button>
+    </div>
+  </section>
+
+  <!-- ============ 出品する ============ -->
+  <section class="screen" id="sell" hidden>
+    <h2 class="pop" style="font-size:24px;margin:16px 2px 4px">券を出品する</h2>
+    <div class="sortline" style="padding:0 2px 10px">自分の時間を、券にして売ります</div>
+
+    <div class="block">
+      <h3 class="pop">写真</h3>
+      <div class="photos">
+        <div class="ph main has" style="background:url(img/t1.png) center/cover"></div>
+        <div class="ph has">🌇</div>
+        <div class="ph has">🪑</div>
+        <div class="ph">＋<br>追加</div>
+        <div class="ph">＋<br>追加</div>
+      </div>
+      <p class="maplabel">大きい枠がメインの写真です。一覧と詳細で最初に表示されます。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">券の内容</h3>
+      <label class="field"><span>タイトル<b>必須</b></span><input value="30分、なんでもない話をしませんか"></label>
+      <label class="field"><span>カテゴリ<b>必須</b></span>
+        <select><option>話し相手</option><option>相談</option><option>教える</option><option>作業</option><option>その他</option></select></label>
+      <div class="field"><span>タグ</span>
+        <div class="tagbox">
+          <div class="tagwrap" id="tagwrap">
+            <span class="chip">#カフェ<button type="button" data-untag aria-label="外す">×</button></span>
+            <span class="chip">#聞き役<button type="button" data-untag aria-label="外す">×</button></span>
+            <input id="taginput" placeholder="タグを入力（読点や空白で区切ると複数入ります）" autocomplete="off">
+          </div>
+          <div class="suggest" id="suggest" hidden></div>
+        </div>
+        <p class="tagnote">さがす画面の検索で使われます。5つまで。</p>
+      </div>
+      <div class="two">
+        <label class="field"><span>時間<b>必須</b></span>
+          <select><option>30分</option><option>45分</option><option>60分</option><option>90分</option></select></label>
+        <label class="field"><span>価格（円）<b>必須</b></span><input value="1500" inputmode="numeric"></label>
+      </div>
+      <label class="field"><span>説明</span>
+        <textarea rows="5">喫茶店で30分、ゆっくりお話しします。
+仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。
+待ち合わせの場所と時間は、ご購入のあとメッセージで決めさせてください。</textarea></label>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">待ち合わせのあたり</h3>
+      <label class="field"><span>場所<b>必須</b></span><input value="渋谷駅 ハチ公口のあたり"></label>
+      <p class="maplabel">地図には、ここで指定した場所だけが表示されます。ご自宅の住所は入れないでください。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">空いている時間</h3>
+      <div class="cal-nav">
+        <button type="button" data-calweek="-1">‹ 前の一週間</button>
+        <span class="ym" id="cal-ym"></span>
+        <button type="button" data-calweek="1">次の一週間 ›</button>
+      </div>
+      <table class="cal" id="cal"></table>
+      <div class="cal-legend"><span><i></i>空いている</span><span><i class="x"></i>休み</span></div>
+      <p class="maplabel">升目を押すと ○ と × が切り替わります。日付を押すと、その日をまとめて切り替えられます。<br>
+        ここで○にした枠が、購入する方に「空いている時間」として見えます。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">キャンセルの決まり</h3>
+      <label class="field"><span>いつまで無料で取り消せるか</span>
+        <select><option>前日まで</option><option>3日前まで</option><option>当日の朝まで</option></select></label>
+      <label class="field"><span>それ以降の取り消し</span>
+        <select><option>料金の50%</option><option>料金の100%</option><option>料金の30%</option></select></label>
+      <p class="maplabel">取り消した側が負担します。運営の手数料はお返ししません。</p>
+    </div>
+
+    <button class="submit pop" type="button" data-sample-msg="サンプルのため、実際には出品されません。">この内容で出品する</button>
+    <p class="hint">サンプルのため、入力した内容は保存されません。</p>
+  </section>
+
+  <!-- ============ プロフィール ============ -->
+  <section class="screen" id="profile" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 4px">プロフィール</h2>
+    <div class="sortline" style="padding:0 2px 10px">券の詳細と、出品者のページに表示されます</div>
+
+    <div class="block">
+      <h3 class="pop">写真とお名前</h3>
+      <div class="avatarpick">
+        <div class="big">桜</div>
+        <button type="button" data-sample-msg="サンプルのため、写真は変えられません。">写真を変える</button>
+      </div>
+      <label class="field"><span>表示名<b>必須</b></span><input value="さくら"></label>
+      <label class="field"><span>ひとこと（肩書き）</span><input value="話し相手・きき役"></label>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">自己紹介</h3>
+      <label class="field"><span>本文</span>
+        <textarea rows="6">はじめまして、さくらです。
+カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。
+聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。
+渋谷・新宿・下北沢のあたりでお会いできます。</textarea></label>
+      <p class="maplabel">最初の3行が、券の詳細に表示されます。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">活動する地域</h3>
+      <label class="field"><span>おもな地域</span><input value="渋谷区"></label>
+    </div>
+
+    <button class="submit yel pop" type="button" data-sample-msg="サンプルのため、実際には保存されません。">保存する</button>
+
+    <div class="danger">
+      <button type="button" data-sample-msg="ログアウトします（サンプルのため、実際には何も起きません）。">ログアウト</button>
+      <button type="button" class="quit" data-sample-msg="退会の手続きに進みます。取引中の券がある場合は、完了してからになります。">退会</button>
+    </div>
+    <p class="hint">サンプルのため、入力した内容は保存されません。</p>
+  </section>
+
+  <!-- ============ マイページ（メニュー） ============ -->
+  <section class="screen" id="mypage" hidden>
+    <h2 class="pop" style="font-size:24px;margin:16px 2px 0">マイページ</h2>
+    <div class="me-head">
+      <div class="big">桜</div>
+      <div class="nm pop">さくら</div>
+      <div class="sub">話し相手・きき役　　★4.8（32件）</div>
+    </div>
+
+    <div class="menu">
+      <button type="button" data-go="profile">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5S20 17 20 21"/></svg></span>
+        プロフィール<span class="cv" style="margin-left:auto">›</span></button>
+      <button type="button" data-go="verify">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="12" r="2.5"/><path d="M14 10h4M14 14h4"/></svg></span>
+        本人確認<span class="cnt">提出済み</span><span class="cv">›</span></button>
+      <button type="button" data-go="sales">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-8"/><path d="M14 8h6v6"/></svg></span>
+        売上確認<span class="cnt">¥24,000</span><span class="cv">›</span></button>
+      <button type="button" data-go="terms">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg></span>
+        プライバシーポリシー・規約<span class="cv" style="margin-left:auto">›</span></button>
+      <button type="button" data-go="contact">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M3 8l9 6 9-6"/></svg></span>
+        運営に問い合わせ<span class="cv" style="margin-left:auto">›</span></button>
+      <button type="button" data-go="notices">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 6-3 7-3 7h18s-3-1-3-7"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span>
+        お知らせ<span class="cnt" style="color:var(--red)">未読 2</span><span class="cv">›</span></button>
+      <button type="button" data-go="settings">
+        <span class="mi"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></span>
+        設定<span class="cv" style="margin-left:auto">›</span></button>
+    </div>
+    <p class="hint">受け取り口座の登録は「売上確認」から行います。</p>
+  </section>
+
+  <!-- ============ 本人確認 ============ -->
+  <section class="screen" id="verify" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 14px">本人確認</h2>
+
+    <div class="block">
+      <h3 class="pop">提出の状態</h3>
+      <p style="margin-bottom:10px"><span class="ok-badge">✔ 提出済み・確認が完了しています</span></p>
+      <div class="row"><span class="k">提出した書類</span><span>運転免許証</span></div>
+      <div class="row"><span class="k">提出日</span><span class="num">2026/09/03</span></div>
+      <div class="row"><span class="k">確認日</span><span class="num">2026/09/05</span></div>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">表示について</h3>
+      <p>出品者のページと券の詳細に「✔ 本人確認済」と表示されます。<br>
+        お名前や書類の内容は、購入する方には表示されません。</p>
+    </div>
+    <p class="hint">書類の再提出が必要になった場合は、ここにご案内が表示されます。</p>
+  </section>
+
+  <!-- ============ 売上確認 ============ -->
+  <section class="screen" id="sales" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 14px">売上確認</h2>
+
+    <div class="block">
+      <h3 class="pop">出金できる金額</h3>
+      <div class="sales-big"><div class="v">¥24,000</div><div class="l">手数料20%を引いたあとの金額です</div></div>
+      <button class="submit pop" type="button" style="margin-top:6px" data-sample-msg="出金の申請を受け付けました（サンプルのため、実際には送金されません）。">出金を申請する</button>
+      <p class="maplabel">受け取り口座：ゆうちょ銀行　〇〇八店　普通 ****1234　（変更）</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">今月の売上（9月）</h3>
+      <div class="row"><span class="k">売れた券</span><span>8件</span></div>
+      <div class="row"><span class="k">売上の合計</span><span class="num">¥30,000</span></div>
+      <div class="row"><span class="k">運営の手数料（20%）</span><span class="num">− ¥6,000</span></div>
+      <div class="row total"><span>お受け取り</span><span class="v num">¥24,000</span></div>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">最近の売上</h3>
+      <div class="row"><span>9/9　30分、なんでもない話（りく）</span><span class="num">¥1,200</span></div>
+      <div class="row"><span>9/6　本屋を一緒にまわりましょう（あおい）</span><span class="num">¥1,600</span></div>
+      <div class="row"><span>9/2　30分、なんでもない話（ゆい）</span><span class="num">¥1,200</span></div>
+      <div class="row"><span>8/30　甘いものを食べながら（けん）</span><span class="num">¥1,440</span></div>
+      <p class="maplabel">金額は手数料を引いたあとのものです。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">出金の履歴</h3>
+      <div class="row"><span class="k">8/31　申請 → 9/5 お振り込み</span><span class="num">¥18,400</span></div>
+      <div class="row"><span class="k">7/31　申請 → 8/5 お振り込み</span><span class="num">¥12,800</span></div>
+    </div>
+    <p class="hint">締め日と支払日、最低支払額は運営の設定に従います。サンプルでは月末締め・翌月5日払いとしています。</p>
+  </section>
+
+  <!-- ============ プライバシーポリシー・規約 ============ -->
+  <section class="screen" id="terms" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 14px">プライバシーポリシー・規約</h2>
+
+    <div class="block">
+      <h3 class="pop">利用規約</h3>
+      <div class="terms-ph">ここにテキストを表示する</div>
+    </div>
+    <div class="block">
+      <h3 class="pop">プライバシーポリシー</h3>
+      <div class="terms-ph">ここにテキストを表示する</div>
+    </div>
+    <div class="block">
+      <h3 class="pop">特定商取引法に基づく表記</h3>
+      <div class="terms-ph">ここにテキストを表示する</div>
+    </div>
+    <p class="hint">文面は運営者様にご用意いただきます（専門家へのご依頼）。こちらは表示する枠です。</p>
+  </section>
+
+  <!-- ============ お知らせ（一覧） ============ -->
+  <section class="screen" id="notices" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 4px">お知らせ</h2>
+    <div class="sortline" style="padding:0 2px 12px">運営からのお知らせです。新しい順に並んでいます</div>
+
+    <div class="notices">
+      <button class="notice" data-go="notice">
+        <div><span class="kind imp">重要</span><div class="ti">9月の出金は、9/5（金）にお振り込みしました</div>
+          <div class="ex">8月分の売上を、ご登録の口座へお振り込みしました。明細は「売上確認」から…</div></div>
+        <div><div class="dt">9/5</div><div class="dot"></div></div>
+      </button>
+      <button class="notice" data-sample-msg="サンプルでは、いちばん上のお知らせだけ開けます。">
+        <div><span class="kind">お願い</span><div class="ti">待ち合わせの場所は、駅や店など人目のあるところで</div>
+          <div class="ex">安心してお会いいただくために、待ち合わせは公共の場所をお選びください…</div></div>
+        <div><div class="dt">9/1</div><div class="dot"></div></div>
+      </button>
+      <button class="notice read" data-sample-msg="サンプルでは、いちばん上のお知らせだけ開けます。">
+        <div><span class="kind info">機能</span><div class="ti">「カテゴリごと」の表示を追加しました</div>
+          <div class="ex">さがす画面で、近い順とカテゴリごとを切り替えられるようになりました…</div></div>
+        <div><div class="dt">8/25</div></div>
+      </button>
+      <button class="notice read" data-sample-msg="サンプルでは、いちばん上のお知らせだけ開けます。">
+        <div><span class="kind info">機能</span><div class="ti">タグで探せるようになりました</div>
+          <div class="ex">出品にタグを付けると、検索で見つかりやすくなります。人気のタグは…</div></div>
+        <div><div class="dt">8/18</div></div>
+      </button>
+      <button class="notice read" data-sample-msg="サンプルでは、いちばん上のお知らせだけ開けます。">
+        <div><span class="kind">お願い</span><div class="ti">利用規約を一部改定しました（8/10）</div>
+          <div class="ex">キャンセル料の扱いについて、文言を整理しました。内容はマイページの…</div></div>
+        <div><div class="dt">8/10</div></div>
+      </button>
+    </div>
+    <p class="hint">赤い点は未読です。開くと消えます。</p>
+  </section>
+
+  <!-- ============ お知らせ（詳細） ============ -->
+  <section class="screen article" id="notice" hidden>
+    <button class="back" data-go="notices">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <div style="margin:4px 2px 6px"><span class="kind imp" style="font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;border:2px solid #111;background:var(--red);color:#fff">重要</span></div>
+    <h2 class="pop" style="font-size:22px;margin:0 2px 4px;line-height:1.45">9月の出金は、9/5（金）にお振り込みしました</h2>
+    <div class="dt">2026/09/05　運営より</div>
+
+    <div class="block body">
+      <p>いつも timely をご利用いただき、ありがとうございます。</p>
+      <p>8月分の売上を、9/5（金）にご登録の口座へお振り込みしました。<br>
+        金融機関によっては、反映まで1〜2営業日かかることがございます。</p>
+      <p>明細は、マイページの「売上確認」からご覧いただけます。<br>
+        金額に相違がございましたら、「運営に問い合わせ」からご連絡ください。</p>
+      <p>次回のお振り込みは、9月分を締めたあとの 10/5（月）を予定しております。</p>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">関連する項目</h3>
+      <button class="submit yel pop" type="button" data-go="sales" style="margin-top:4px">売上確認を開く</button>
+    </div>
+  </section>
+
+  <!-- ============ 設定 ============ -->
+  <section class="screen" id="settings" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 14px">設定</h2>
+
+    <div class="block">
+      <h3 class="pop">画面の色</h3>
+      <div class="setting-row">
+        <div class="l">ブラック／ホワイト<small>すべての画面に反映されます</small></div>
+      </div>
+      <div class="seg2" role="group" aria-label="画面の色">
+        <button type="button" data-mode="dark" aria-pressed="true">ブラック</button>
+        <button type="button" data-mode="light" aria-pressed="false">ホワイト</button>
+      </div>
+      <div class="swatch"><div class="b">黒地に黄</div><div class="w">明るい地に黒</div></div>
+    </div>
+    <p class="hint">この試作では、いちばん上の帯にある切り替えと同じ働きをします。</p>
+  </section>
+
+  <!-- ============ 運営に問い合わせ ============ -->
+  <section class="screen" id="contact" hidden>
+    <button class="back" data-go="mypage">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+    <h2 class="pop" style="font-size:24px;margin:4px 2px 14px">運営に問い合わせ</h2>
+
+    <div class="block">
+      <label class="field" style="margin-top:0"><span>お問い合わせの種類<b>必須</b></span>
+        <select>
+          <option>取引について（相手と連絡が取れない、など）</option>
+          <option>お支払い・出金について</option>
+          <option>キャンセル・返金について</option>
+          <option>本人確認について</option>
+          <option>不適切な出品・会員の通報</option>
+          <option>不具合の報告</option>
+          <option>その他</option>
+        </select></label>
+      <label class="field"><span>対象の取引（あれば）</span>
+        <select><option>選択しない</option><option>#10238　さくら　9/15</option><option>#10231　けん　9/9</option><option>#10229　みなと　9/20</option></select></label>
+      <label class="field"><span>内容<b>必須</b></span>
+        <textarea rows="6" placeholder="できるだけ具体的にお書きください。日時や相手のお名前があると早く確認できます。"></textarea></label>
+      <label class="field"><span>返信先のメールアドレス</span><input value="sakura@example.com"></label>
+    </div>
+
+    <button class="submit pop" type="button" data-sample-msg="お問い合わせを受け付けました（サンプルのため、実際には送信されません）。">送信する</button>
+    <p class="hint">通常、2営業日以内にお返事します。緊急の場合はその旨をお書きください。</p>
+  </section>
+
+  <!-- ============ 取引の一覧 ============ -->
+  <section class="screen" id="deals" hidden>
+    <h2 class="pop" style="font-size:24px;margin:16px 2px 4px">取引</h2>
+    <div class="sortline" style="padding:0 2px 12px">購入した券・売れた券のやり取りです</div>
+
+    <div class="deals">
+      <button class="deal" data-go="chat">
+        <div class="ava">桜</div>
+        <div>
+          <div class="nm">さくら <span class="st">やり取り中</span></div>
+          <div class="tk">30分、なんでもない話をしませんか　9/15（火）10:30〜</div>
+          <div class="last">承知しました。当日はハチ公口の改札を出たところでお待ちしています。</div>
+        </div>
+        <div class="right"><span class="time">10:41</span><span class="unread">1</span></div>
+      </button>
+      <button class="deal" data-sample-msg="サンプルでは、さくらさんとのやり取りだけ開けます。">
+        <div class="ava" style="background:#3DBB6D;color:#fff">健</div>
+        <div>
+          <div class="nm">けん <span class="st done">完了</span></div>
+          <div class="tk">一緒に散歩しながらお話しします　9/9（水）</div>
+          <div class="last">ありがとうございました！また歩きましょう。</div>
+        </div>
+        <div class="right"><span class="time">昨日</span></div>
+      </button>
+      <button class="deal" data-sample-msg="サンプルでは、さくらさんとのやり取りだけ開けます。">
+        <div class="ava" style="background:#2AB7CA;color:#fff">港</div>
+        <div>
+          <div class="nm">みなと <span class="st paid">支払い済み</span></div>
+          <div class="tk">釣りのコツ、現地でお教えします　9/20（日）06:00〜</div>
+          <div class="last">日曜の朝でいかがですか。潮がいいです。</div>
+        </div>
+        <div class="right"><span class="time">9/9</span><span class="unread">2</span></div>
+      </button>
+    </div>
+
+    <p class="hint">見た目のサンプルです。文字だけのやり取りで、写真やファイルの送信はありません。</p>
+  </section>
+
+  <!-- ============ チャットの詳細 ============ -->
+  <section class="screen" id="chat" hidden>
+    <div class="chat-head">
+      <button class="back" data-go="deals">
+        <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="ava" style="width:40px;height:40px;font-size:16px">桜</div>
+      <div class="who">
+        <div class="nm">さくら <span class="st" style="font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;border:2px solid #111;background:var(--yel);color:#111">やり取り中</span></div>
+        <div class="tk">30分、なんでもない話をしませんか</div>
+      </div>
+    </div>
+
+    <ol class="punch" style="margin-bottom:12px">
+      <li class="done">購入</li>
+      <li class="done">お支払い</li>
+      <li class="now">やり取り</li>
+      <li>完了</li>
+    </ol>
+
+    <div class="chat-strip">
+      <div class="when">9/15（火）10:30〜11:00<small>渋谷駅 ハチ公口のあたり　¥1,500</small></div>
+      <button type="button" class="done-btn" data-sample-msg="お会いになったあとに押していただくと、出品者へのお支払いが確定します。">取引を完了する</button>
+    </div>
+
+    <div class="msgs">
+      <div class="day"><span>9/11（金）</span></div>
+      <div class="msg sys"><div class="bub">購入が確定しました。お支払いは運営がお預かりしています</div></div>
+      <div class="msg"><div class="ava">桜</div><div><div class="bub">ご購入ありがとうございます！<br>9/15の10:30ですね。待ち合わせの場所は、渋谷駅のハチ公口でよろしいですか？</div></div><span class="meta">10:12</span></div>
+      <div class="msg me"><div><div class="bub">よろしくお願いします。ハチ公口で大丈夫です。<br>初めてなので少し緊張しています。</div></div><span class="meta">10:30</span></div>
+      <div class="msg"><div class="ava">桜</div><div><div class="bub">大丈夫ですよ、気楽に来てください。<br>近くに静かな喫茶店があるので、そこで話しましょう。</div></div><span class="meta">10:35</span></div>
+      <div class="msg me"><div><div class="bub">ありがとうございます。目印になるものはありますか？</div></div><span class="meta">10:38</span></div>
+      <div class="msg"><div class="ava">桜</div><div><div class="bub">承知しました。当日はハチ公口の改札を出たところでお待ちしています。<br>黄色いバッグを持っています。</div></div><span class="meta">10:41</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 購入 ============ -->
+  <section class="screen" id="buy" hidden>
+    <button class="back" data-go="item">
+      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      もどる
+    </button>
+
+    <h2 class="pop" style="font-size:24px;margin:6px 2px 14px">購入の確認</h2>
+
+    <div class="block">
+      <h3 class="pop">ご購入の内容</h3>
+      <div class="row"><span>30分、なんでもない話をしませんか</span><span class="num">¥1,500</span></div>
+      <div class="row"><span class="k">日時</span><span class="num" id="buy-when">9/11（金）09:00〜09:30</span></div>
+      <div class="row"><span class="k">出品者</span><span>さくら</span></div>
+      <div class="row total"><span>お支払い金額</span><span class="v num">¥1,500</span></div>
+    </div>
+
+    <div class="block" style="padding-bottom:10px">
+      <h3 class="pop">お支払い方法</h3>
+      <div class="paypay">
+        <div class="pplogo">PayPay</div>
+        <div>
+          <div style="font-weight:900">PayPayでお支払い</div>
+          <div style="font-size:12px;color:var(--ink-dim);font-weight:700">残高　¥8,240</div>
+        </div>
+        <span class="check">✔</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">お預かりの扱い</h3>
+      <p>代金は運営がいったんお預かりします。<br>
+        お会いになったあと、「取引を完了する」を押していただいた時点で、出品者へお支払いします。</p>
+    </div>
+
+    <p class="hint">サンプルのため、実際のお支払いは行われません。</p>
+  </section>
+
+</div>
+
+<div class="buybar" id="buybar" hidden>
+  <div class="buybar-in">
+    <button class="bigbtn quiet" id="favbtn" aria-label="お気に入り">♡</button>
+    <button class="bigbtn pop" id="mainbtn">購入に進む</button>
+  </div>
+</div>
+
+<div class="chatbar" id="chatbar" hidden>
+  <div class="chatbar-in">
+    <div class="inp"><span>メッセージを入力</span></div>
+    <button type="button" class="send" data-sample-msg="サンプルのため、送信はできません。">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2-6z"/></svg>
+    </button>
+  </div>
+</div>
+
+<nav class="tabs" id="tabs" role="tablist" aria-label="画面">
+  <button role="tab" aria-selected="true" data-go="find">
+    <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>さがす</button>
+  <button role="tab" aria-selected="false" data-go="sell">
+    <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>出品</button>
+  <button role="tab" aria-selected="false" data-go="deals">
+    <svg class="ico" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg>取引</button>
+  <button role="tab" aria-selected="false" data-go="mypage">
+    <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5S20 17 20 21"/></svg>マイページ</button>
+</nav>
+
+<script>
+  const ITEMS = [
+    { img:"img/t1.png", cat:"話し相手", tag:"NEW", t:"30分、なんでもない話をしませんか", y:"1,500", per:"30分", st:"4.8", n:"32", km:"1.2km" },
+    { img:"img/t2.png", cat:"話し相手", tag:"",    t:"一緒に散歩しながらお話しします",   y:"1,200", per:"40分", st:"4.6", n:"18", km:"1.8km" },
+    { img:"img/t3.png", cat:"話し相手", tag:"HOT", t:"読書の感想を語り合いましょう",     y:"1,000", per:"30分", st:"5.0", n:"9",  km:"2.4km" },
+    { img:"img/t4.png", cat:"教える",   tag:"NEW", t:"釣りのコツ、現地でお教えします",   y:"3,000", per:"90分", st:"4.9", n:"44", km:"3.1km" },
+    { img:"img/t5.png", cat:"作業",     tag:"",    t:"お部屋の片づけを一緒にやります",   y:"2,500", per:"60分", st:"4.7", n:"51", km:"3.6km" },
+    { img:"img/t6.png", cat:"教える",   tag:"",    t:"ギターの持ち方から始めます",       y:"2,000", per:"60分", st:"4.8", n:"26", km:"4.2km" }
+  ];
+
+  document.getElementById("cards").innerHTML = ITEMS.map(function (i) {
+    return '<button class="card" data-go="item">' +
+      '<span class="shot"><img src="' + i.img + '" alt="">' +
+        '<span class="tagprice"><span class="y num">¥' + i.y + '</span><span class="p">/ ' + i.per + '</span></span></span>' +
+      '<span class="ttl">' + i.t + '</span>' +
+      '<span class="foot"><span class="star">★' + i.st + '</span>(' + i.n + ')　' + i.km + '</span>' +
+    '</button>';
+  }).join("");
+
+  // ---- 空いている時間（仮のデータ） ----
+  const DAYS = [
+    { d:"11", w:"金", cls:"fri on", n:16 }, { d:"12", w:"土", cls:"sat", n:16 },
+    { d:"13", w:"日", cls:"sun off", n:0 }, { d:"14", w:"月", cls:"", n:12 },
+    { d:"15", w:"火", cls:"", n:16 }, { d:"16", w:"水", cls:"", n:8 }, { d:"17", w:"木", cls:"", n:16 }
+  ];
+  let pickedDay = DAYS[0];
+  let pickedSlot = "09:00";
+
+  function slotsFor(day) {
+    const out = [];
+    for (let h = 9; h < 17; h++) { out.push(pad(h) + ":00〜" + pad(h) + ":30"); out.push(pad(h) + ":30〜" + pad(h + 1) + ":00"); }
+    return out.slice(0, day.n);
+  }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function label(day, slot) { return "9/" + day.d + "（" + day.w + "）" + slot; }
+
+  function renderAvail() {
+    document.querySelectorAll("[data-week]").forEach(function (w) {
+      w.innerHTML = DAYS.map(function (x) {
+        const on = (x === pickedDay) ? " on" : "";
+        return '<button type="button" class="d ' + x.cls.replace(" on", "") + on + '" data-day="' + x.d + '"' + (x.n === 0 ? ' disabled' : '') + '>' +
+          '<span class="w">' + x.w + '</span><span class="n">' + x.d + '</span>' +
+          '<span class="c">' + (x.n === 0 ? '休' : x.n + '件') + '</span></button>';
+      }).join("");
+    });
+    document.querySelectorAll("[data-slots]").forEach(function (el) {
+      const lim = el.dataset.limit ? Number(el.dataset.limit) : 999;
+      el.innerHTML = slotsFor(pickedDay).slice(0, lim).map(function (t) {
+        return '<div class="slot"><div class="t"><small>9/' + pickedDay.d + '（' + pickedDay.w + '）</small><b>' + t + '</b></div>' +
+          '<button type="button" class="go" data-slot="' + t + '">購入画面に進む</button></div>';
+      }).join("");
+    });
+  }
+  renderAvail();
+
+  // ---- カテゴリごとの表示（見出し＋大小のモザイク） ----
+  (function () {
+    const cats = [];
+    ITEMS.forEach(function (i) { if (cats.indexOf(i.cat) < 0) cats.push(i.cat); });
+    document.getElementById("view-cat").innerHTML = cats.map(function (c) {
+      const list = ITEMS.filter(function (i) { return i.cat === c; });
+      return '<section class="catsec">' +
+        '<div class="h"><span class="t pop">' + c + '</span>' +
+        '<button type="button" class="ic-btn" data-sample-msg="カテゴリをお気に入りに入れます。">♡</button>' +
+        '<button type="button" class="ic-btn" data-sample-msg="このカテゴリをまとめて見る、通報する、などのメニューが開きます。">⋯</button></div>' +
+        '<div class="mosaic">' + list.map(function (i, idx) {
+          return '<button class="m' + (idx === 0 ? ' big' : '') + '" data-go="item">' +
+            '<img src="' + i.img + '" alt="">' +
+            (i.tag ? '<span class="new' + (i.tag === 'HOT' ? ' hot' : '') + '">' + i.tag + '</span>' : '') +
+            '<span class="pr">¥' + i.y + '</span></button>';
+        }).join('') + '</div></section>';
+    }).join('');
+  })();
+
+  // ---- 詳細のスライダー ----
+  const slides = document.getElementById("slides");
+  const thumbs = document.getElementById("thumbs");
+  function markSlide(idx) {
+    thumbs.querySelectorAll("button").forEach(function (b, i) { b.classList.toggle("on", i === idx); });
+    document.getElementById("slide-count").textContent = (idx + 1) + " / " + slides.children.length;
+  }
+  slides.addEventListener("scroll", function () {
+    const idx = Math.round(slides.scrollLeft / slides.clientWidth);
+    markSlide(idx);
+  }, { passive: true });
+
+  // ---- タグ入力（人気のタグから選ぶ、複数登録） ----
+  const POPULAR = [
+    ["カフェ", 128], ["聞き役", 96], ["散歩", 84], ["初心者歓迎", 77], ["土日OK", 71],
+    ["夜もOK", 64], ["渋谷", 58], ["新宿", 52], ["ゆっくり話す", 47], ["相談", 44],
+    ["趣味の話", 39], ["仕事の愚痴", 35], ["本", 31], ["映画", 29], ["ペット", 22]
+  ];
+  const tagwrap = document.getElementById("tagwrap");
+  const taginput = document.getElementById("taginput");
+  const suggest = document.getElementById("suggest");
+  function currentTags() { return [...tagwrap.querySelectorAll(".chip")].map(function (c) { return c.firstChild.textContent.replace(/^#/, ""); }); }
+  function addTag(t) {
+    t = t.trim().replace(/^#/, "");
+    if (!t || currentTags().indexOf(t) >= 0 || currentTags().length >= 5) return;
+    const chip = document.createElement("span"); chip.className = "chip";
+    chip.innerHTML = "#" + t + '<button type="button" data-untag aria-label="外す">×</button>';
+    tagwrap.insertBefore(chip, taginput);
+  }
+  function showSuggest(q) {
+    const have = currentTags();
+    const list = POPULAR.filter(function (p) { return have.indexOf(p[0]) < 0 && (!q || p[0].indexOf(q) >= 0); }).slice(0, 6);
+    if (!list.length || have.length >= 5) { suggest.hidden = true; return; }
+    suggest.innerHTML = '<div class="hd">人気のタグ</div>' + list.map(function (p) {
+      return '<button type="button" data-tag="' + p[0] + '"><span class="hash">#</span>#' + p[0] + '<span class="n">' + p[1] + '件</span></button>';
+    }).join("");
+    suggest.hidden = false;
+  }
+  taginput.addEventListener("focus", function () { showSuggest(taginput.value.trim()); });
+  taginput.addEventListener("input", function () {
+    const v = taginput.value;
+    if (/[、,\s]$/.test(v)) { addTag(v.replace(/[、,\s]+$/, "")); taginput.value = ""; showSuggest(""); return; }
+    showSuggest(v.trim());
+  });
+  taginput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); addTag(taginput.value); taginput.value = ""; showSuggest(""); }
+    if (e.key === "Backspace" && !taginput.value) { const last = tagwrap.querySelector(".chip:last-of-type"); if (last) last.remove(); }
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest(".tagbox")) suggest.hidden = true; });
+
+  // ---- 空き時間のカレンダー（週ごと、○×を切り替える） ----
+  const CAL_TIMES = []; for (let h = 9; h < 18; h++) { CAL_TIMES.push(pad(h) + ":00"); CAL_TIMES.push(pad(h) + ":30"); }
+  let calStart = new Date(2026, 8, 14);           // 9/14（月）の週から
+  const calOff = {};                              // "9/13-09:00": true なら休み
+  const WD = ["日","月","火","水","木","金","土"];
+  function calKey(d, t) { return (d.getMonth() + 1) + "/" + d.getDate() + "-" + t; }
+  function isOff(d, t) { const k = calKey(d, t); if (k in calOff) return calOff[k]; return d.getDay() === 0; }
+  function renderCal() {
+    const days = []; for (let i = 0; i < 7; i++) { const d = new Date(calStart); d.setDate(calStart.getDate() + i); days.push(d); }
+    document.getElementById("cal-ym").textContent = (days[0].getFullYear()) + "年" + (days[0].getMonth() + 1) + "月";
+    let html = "<thead><tr><th style='background:none'></th>" + days.map(function (d) {
+      const allOff = CAL_TIMES.every(function (t) { return isOff(d, t); });
+      return "<th class='" + (d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : "") + (allOff ? " off" : "") + "' data-day-toggle='" + calKey(d, "") + "'>" +
+        "<span class='d'>" + d.getDate() + "</span>" + WD[d.getDay()] + "</th>";
+    }).join("") + "</tr></thead><tbody>";
+    CAL_TIMES.forEach(function (t) {
+      html += "<tr><td class='t'>" + t + "</td>" + days.map(function (d) {
+        const off = isOff(d, t);
+        return "<td class='c'><button type='button' class='" + (off ? "off" : "on") + "' data-cell='" + calKey(d, t) + "'>" + (off ? "×" : "○") + "</button></td>";
+      }).join("") + "</tr>";
+    });
+    document.getElementById("cal").innerHTML = html + "</tbody>";
+  }
+  renderCal();
+
+  const screens = document.querySelectorAll(".screen");
+  const tabs = document.querySelectorAll("nav.tabs button");
+  const buybar = document.getElementById("buybar");
+  const mainbtn = document.getElementById("mainbtn");
+
+  function show(id) {
+    screens.forEach(function (s) { s.hidden = (s.id !== id); });
+    const tabOf = { find: "find", item: "find", when: "find", buy: "find", host: "find", sell: "sell",
+                    mypage: "mypage", profile: "mypage", verify: "mypage", sales: "mypage", terms: "mypage", contact: "mypage",
+                    notices: "mypage", notice: "mypage", settings: "mypage",
+                    deals: "deals", chat: "deals" };
+    tabs.forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.go === tabOf[id])); });
+    const bar = (id === "item" || id === "buy");
+    buybar.hidden = !bar;
+    document.getElementById("chatbar").hidden = (id !== "chat");
+    document.getElementById("tabs").hidden = !(id === "find" || id === "sell" || id === "mypage" || id === "deals");
+    if (bar) {
+      mainbtn.textContent = (id === "item") ? "購入に進む" : "¥1,500 を支払う";
+      mainbtn.classList.toggle("red", id === "buy");
+      mainbtn.dataset.go = (id === "item") ? "when" : "";
+    }
+    if (id === "buy") { document.getElementById("buy-when").textContent = label(pickedDay, pickedSlot); }
+    if (id === "item") { slides.scrollTo({ left: 0 }); markSlide(0); }
+    if (id === "notice") { const n = document.querySelector('#notices .notice[data-go="notice"]'); n.classList.add("read"); const d = n.querySelector(".dot"); if (d) d.remove(); }
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  document.addEventListener("click", function (ev) {
+    const sample = ev.target.closest("[data-sample]");
+    if (sample) { alert("このサンプルでは省いています。"); return; }
+    const msg = ev.target.closest("[data-sample-msg]");
+    if (msg) { alert(msg.dataset.sampleMsg); return; }
+    const fol = ev.target.closest("#followbtn");
+    if (fol) { fol.classList.toggle("on"); fol.textContent = fol.classList.contains("on") ? "✔ フォロー中" : "＋ フォロー"; return; }
+
+    const sg = ev.target.closest("[data-tag]");
+    if (sg) { addTag(sg.dataset.tag); taginput.value = ""; showSuggest(""); taginput.focus(); return; }
+    const un = ev.target.closest("[data-untag]");
+    if (un) { un.parentElement.remove(); return; }
+
+    const cell = ev.target.closest("[data-cell]");
+    if (cell) { const k = cell.dataset.cell; const parts = k.split("-"); const d = new Date(2026, Number(parts[0].split("/")[0]) - 1, Number(parts[0].split("/")[1]));
+      calOff[k] = !isOff(d, parts[1]); renderCal(); return; }
+    const dt = ev.target.closest("[data-day-toggle]");
+    if (dt) { const md = dt.dataset.dayToggle.replace(/-$/, ""); const d = new Date(2026, Number(md.split("/")[0]) - 1, Number(md.split("/")[1]));
+      const allOff = CAL_TIMES.every(function (t) { return isOff(d, t); });
+      CAL_TIMES.forEach(function (t) { calOff[calKey(d, t)] = !allOff; }); renderCal(); return; }
+    const wk = ev.target.closest("[data-calweek]");
+    if (wk) { calStart.setDate(calStart.getDate() + 7 * Number(wk.dataset.calweek)); renderCal(); return; }
+
+    const view = ev.target.closest("[data-view]");
+    if (view) {
+      view.parentElement.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-selected", String(b === view)); });
+      document.getElementById("view-near").hidden = (view.dataset.view !== "near");
+      document.getElementById("view-cat").hidden = (view.dataset.view !== "cat");
+      return;
+    }
+    const th = ev.target.closest("[data-slide]");
+    if (th) {
+      const idx = Number(th.dataset.slide);
+      slides.scrollTo({ left: idx * slides.clientWidth, behavior: "smooth" });
+      markSlide(idx); return;
+    }
+    const day = ev.target.closest("[data-day]");
+    if (day) { pickedDay = DAYS.find(function (x) { return x.d === day.dataset.day; }); renderAvail(); return; }
+    const slot = ev.target.closest("[data-slot]");
+    if (slot) { pickedSlot = slot.dataset.slot; show("buy"); return; }
+
+    const go = ev.target.closest("[data-go]");
+    if (go && go.dataset.go) { show(go.dataset.go); return; }
+
+    const kind = ev.target.closest(".kinds button");
+    if (kind) {
+      kind.parentElement.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      kind.setAttribute("aria-pressed", "true"); return;
+    }
+    const fav = ev.target.closest("#favbtn");
+    if (fav) { fav.textContent = (fav.textContent.trim() === "♡") ? "♥" : "♡"; return; }
+
+    const mode = ev.target.closest("[data-mode]");
+    if (mode) {
+      document.documentElement.dataset.mode = mode.dataset.mode;
+      document.querySelectorAll("[data-mode]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.mode === mode.dataset.mode)); });
+    }
+  });
+</script>
+</body>
+</html>
