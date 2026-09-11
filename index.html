@@ -234,15 +234,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .catsec .h { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
 .catsec .h .t { font-size: 20px; flex: 1; }
 .catsec .h .ic-btn { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: #111; border: 2.5px solid #111; display: grid; place-items: center; font-weight: 900; }
-.mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 8px; }
+.mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; grid-auto-flow: dense; gap: 8px; }
 .mosaic .m { position: relative; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; border: 3px solid #111; text-align: left; padding: 0; background: var(--bg-2); }
 .mosaic .m.big { grid-column: span 2; grid-row: span 2; }
+.mosaic .m.big.r { grid-column: 2 / span 2; }
 .mosaic .m img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mosaic .m .pr {
   position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.72); color: #fff;
-  font-family: "Dela Gothic One"; font-size: 13px; padding: 3px 9px; border-radius: 999px;
+  font-family: "Dela Gothic One"; font-size: 11px; padding: 2px 7px; border-radius: 999px; left: 6px; bottom: 6px;
 }
-.mosaic .m.big .pr { font-size: 16px; padding: 5px 12px; }
+.mosaic .m.big .pr { font-size: 16px; padding: 5px 12px; left: 8px; bottom: 8px; }
 .mosaic .m .new {
   position: absolute; left: -26px; top: 10px; width: 100px; transform: rotate(-45deg);
   background: var(--blue); color: #fff; font-size: 10px; font-weight: 900; text-align: center; padding: 3px 0;
@@ -1324,7 +1325,15 @@ nav.tabs .ico { width: 23px; height: 23px; }
     { img:"img/t3.png", cat:"話し相手", tag:"HOT", t:"読書の感想を語り合いましょう",     y:"1,000", per:"30分", st:"5.0", n:"9",  km:"2.4km" },
     { img:"img/t4.png", cat:"教える",   tag:"NEW", t:"釣りのコツ、現地でお教えします",   y:"3,000", per:"90分", st:"4.9", n:"44", km:"3.1km" },
     { img:"img/t5.png", cat:"作業",     tag:"",    t:"お部屋の片づけを一緒にやります",   y:"2,500", per:"60分", st:"4.7", n:"51", km:"3.6km" },
-    { img:"img/t6.png", cat:"教える",   tag:"",    t:"ギターの持ち方から始めます",       y:"2,000", per:"60分", st:"4.8", n:"26", km:"4.2km" }
+    { img:"img/t6.png", cat:"教える",   tag:"",    t:"ギターの持ち方から始めます",       y:"2,000", per:"60分", st:"4.8", n:"26", km:"4.2km" },
+    { img:"img/t7.png",  cat:"相談", tag:"NEW", t:"転職の相談、経験者が聞きます",         y:"2,000", per:"45分", st:"4.9", n:"38", km:"1.5km" },
+    { img:"img/t8.png",  cat:"相談", tag:"",    t:"引っ越し先の選び方、地元の人が答えます", y:"1,500", per:"30分", st:"4.7", n:"12", km:"2.1km" },
+    { img:"img/t9.png",  cat:"相談", tag:"HOT", t:"子育ての愚痴、聞きます",               y:"1,200", per:"30分", st:"5.0", n:"64", km:"2.6km" },
+    { img:"img/t10.png", cat:"相談", tag:"",    t:"恋の相談、恋バナ歓迎です",             y:"1,000", per:"30分", st:"4.6", n:"21", km:"2.9km" },
+    { img:"img/t11.png", cat:"相談", tag:"NEW", t:"スマホの設定、一緒に見ます",           y:"1,500", per:"40分", st:"4.8", n:"9",  km:"3.3km" },
+    { img:"img/t12.png", cat:"相談", tag:"",    t:"お金の使い方、一緒に見直します",       y:"2,500", per:"60分", st:"4.9", n:"17", km:"3.8km" },
+    { img:"img/t13.png", cat:"相談", tag:"",    t:"進路の相談、大学生が聞きます",         y:"1,000", per:"30分", st:"4.7", n:"30", km:"4.4km" },
+    { img:"img/t14.png", cat:"相談", tag:"HOT", t:"副業の始め方、経験者と話します",       y:"2,000", per:"45分", st:"4.8", n:"45", km:"4.9km" }
   ];
 
   document.getElementById("cards").innerHTML = ITEMS.map(function (i) {
@@ -1383,7 +1392,9 @@ nav.tabs .ico { width: 23px; height: 23px; }
         '<button type="button" class="ic-btn" data-sample-msg="カテゴリをお気に入りに入れます。">♡</button>' +
         '<button type="button" class="ic-btn" data-sample-msg="このカテゴリをまとめて見る、通報する、などのメニューが開きます。">⋯</button></div>' +
         '<div class="mosaic">' + list.map(function (i, idx) {
-          return '<button class="m' + (idx === 0 ? ' big' : '') + '" data-go="item">' +
+          const blk = Math.floor(idx / 6), pos = idx % 6;
+          const cls = (pos === 0) ? (blk % 2 === 0 ? ' big' : ' big r') : '';
+          return '<button class="m' + cls + '" data-go="item">' +
             '<img src="' + i.img + '" alt="">' +
             (i.tag ? '<span class="new' + (i.tag === 'HOT' ? ' hot' : '') + '">' + i.tag + '</span>' : '') +
             '<span class="pr">¥' + i.y + '</span></button>';
