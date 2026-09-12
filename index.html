@@ -10,9 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   ドン・キホーテ風の「わくわく」を狙った配色。
-   黒地に、黄みのオレンジ。値札は赤。密度は高め。
-   ただし、実在の店舗アプリの画面そのものは真似していない。
+   （旧）黒地にサンセット色みのオレンジの配色。値札は赤。密度は高め。
+   → 2026-09-12 に先方指定のサンセット配色へ。上書きは <style> の末尾のブロック。
    ========================================================= */
 :root {
   --bg:      #121212;
@@ -156,6 +155,18 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .pricebig .y { font-size: 34px; line-height: 1; }
 .pricebig .per { font-size: 13px; color: #111; font-weight: 900; }
+.pricebig .unit { font-size: 11px; color: #111; font-weight: 900; background: var(--yel); border-radius: 999px; padding: 2px 8px; margin-left: 4px; }
+.secttl { margin: 18px 2px 8px; font-size: 13px; letter-spacing: .08em; }
+.field > span.withunit { display: flex; align-items: center; gap: 6px; margin: 0; }
+.withunit input { flex: 1; min-width: 0; }
+.withunit em { font-style: normal; font-weight: 900; font-size: 15px; flex: none; color: var(--ink); }
+.unitline { margin-top: 12px; font-size: 13px; font-weight: 700; }
+.unitline b { font-family: "Dela Gothic One"; font-weight: 400; font-size: 18px; color: var(--red); background: var(--yel); padding: 2px 10px; border-radius: 999px; border: 2px solid #111; }
+.unitline small { color: var(--ink-dim); font-weight: 700; }
+.feeline { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: var(--ink-dim); margin-top: 8px; border-top: 1.5px dashed #DDD; padding-top: 6px; }
+.feeline b { font-family: "Dela Gothic One"; font-weight: 400; font-size: 16px; color: #111; }
+.lg { display: inline-block; font-size: 10.5px; font-weight: 900; padding: 1px 8px; border-radius: 999px; border: 2px solid #111; color: #fff; }
+.lg.red { background: var(--red); } .lg.green { background: #1B9C5A; } .lg.blue { background: var(--blue); }
 
 .seller {
   display: flex; align-items: center; gap: 12px;
@@ -398,8 +409,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .deal .ava { width: 54px; height: 54px; font-size: 22px; }
 .deal > div:nth-child(2) { min-width: 0; }
 .deal .nm { font-weight: 900; font-size: 15px; display: flex; align-items: center; gap: 8px; }
-.deal .st { font-size: 10.5px; font-weight: 900; padding: 2px 8px; border-radius: 999px; border: 2px solid #111; background: var(--yel); color: #111; }
-.deal .st.done { background: #E8E8E8; color: #555; border-color: #999; }
+.deal .st { font-size: 10.5px; font-weight: 900; padding: 2px 8px; border-radius: 999px; border: 2px solid #111; background: var(--red); color: #fff; }
+.deal .st.done { background: #1B9C5A; color: #fff; }
 .deal .st.paid { background: var(--blue); color: #fff; border-color: #111; }
 .deal .tk { font-size: 11.5px; color: var(--ink-dim); font-weight: 700; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .deal .last { font-size: 13px; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
@@ -567,6 +578,132 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
 .back { display: inline-flex; align-items: center; gap: 6px; padding: 12px 2px; font-weight: 900; font-size: 14px; color: var(--text); }
 .hint { font-size: 11.5px; color: var(--text-dim); padding: 12px 4px 0; line-height: 1.8; font-weight: 500; }
+
+/* =========================================================
+   サンセット配色（2026-09-12 先方指定）
+   黒ベースに #FF9A3D → #FF6B5F → #FF3E9D → #9B4DFF。
+   全体ではなく、ロゴ・選択中タブ・ボタン・価格・枠線・画像の外枠に。
+   「ドンキっぽさ＝ポップでごちゃごちゃ」は、ステッカーと伏せカードで。
+   このブロックを外すと、上の黄×黒の配色に戻る。
+   ========================================================= */
+:root {
+  --g1: #FF9A3D; --g2: #FF6B5F; --g3: #FF3E9D; --g4: #9B4DFF;
+  --grad:   linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g4));
+  --grad-d: linear-gradient(135deg, var(--g1), var(--g2), var(--g3), var(--g4));
+  --yel:    #FF6B5F;             /* 旧・黄色の役割はコーラルに */
+  --yel-2:  #FF9A3D;
+  --red:    #FF3E9D;             /* 旧・赤の役割（値札・強調）はマゼンタに */
+  --blue:   #9B4DFF;
+  --red-true: #E60023;           /* 取引の「やり取り中」だけは本物の赤 */
+  --bg:     #0E0D12;
+  --bg-2:   #1A1822;
+  --tape:   var(--grad);
+}
+:root[data-mode="light"] { --bg: #FFF4EE; --bg-2: #FFE7DC; --line: #F5D3C4; --tape: var(--grad); }
+
+/* グラデ文字（大きい文字だけ。黒フチは同時にかけられないので外す） */
+.gtx { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* 断り帯・ロゴ */
+.note { border-bottom: 0; border-image: var(--grad) 1; border-bottom: 3px solid; }
+.note b { color: var(--g2); }
+.modes button[aria-pressed="true"] { background: var(--grad); color: #fff; }
+.brand { padding: 4px 14px 6px; }
+.brand .inner { background: #111; color: #fff; box-shadow: 4px 4px 0 var(--g4); border: 2px solid transparent;
+  background: linear-gradient(#111, #111) padding-box, var(--grad) border-box; }
+.brand .logo { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 6px rgba(255,62,157,.55)); }
+.brand .tag { color: #fff; } .brand .tag b { color: var(--g1); }
+
+/* 検索・カテゴリ */
+.find .box { box-shadow: 4px 4px 0 var(--g2); border-color: #111; }
+.bell { background: var(--grad-d); color: #fff; box-shadow: 4px 4px 0 #111; }
+.kinds button[aria-pressed="true"] { background: var(--grad); color: #fff; border-color: transparent; }
+.sticker { background: var(--grad); color: #fff; border-color: #111; }
+.viewtabs button[aria-selected="true"] { background: var(--grad); color: #fff; border-color: transparent; }
+
+/* 一覧：画像の外枠をグラデ、値札はグラデ文字 */
+.card .shot, .mosaic .m, .slider {
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg-2), var(--bg-2)) padding-box, var(--grad-d) border-box;
+}
+.card .shot::after, .slider::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.55)); pointer-events: none; }
+.tagprice { background: #111; border-color: var(--g3); box-shadow: 3px 3px 0 var(--g4); }
+.tagprice .y { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tagprice .p { color: #fff; }
+.star { color: var(--g1); }
+.mosaic .m .new { background: var(--grad); }
+.mosaic .m .hot { background: linear-gradient(90deg, var(--g3), var(--g4)); }
+/* ステッカー（ポップ要素） */
+.stk { position: absolute; left: -6px; bottom: 62px; z-index: 2; transform: rotate(-6deg);
+  background: var(--grad); color: #fff; font-family: "Reggae One"; font-size: 12px; line-height: 1.1;
+  padding: 4px 12px 4px 14px; border: 2px solid #111; box-shadow: 2px 2px 0 #111; }
+.stk.hot { background: linear-gradient(90deg, var(--g3), var(--g4)); }
+.stk.tre { background: #111; color: var(--g1); border-color: var(--g1); }
+/* 伏せカード（宝探し） */
+.card.q .shot { display: grid; place-items: center; text-align: center;
+  background: repeating-linear-gradient(-45deg, #141219 0 8px, #201c2b 8px 16px) padding-box, var(--grad-d) border-box;
+  border-style: dashed; }
+.card.q .shot > span { display: grid; justify-items: center; }
+.card.q .qq { display: block; font-family: "Dela Gothic One"; font-size: 36px; line-height: 1; background: var(--grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 8px rgba(255,62,157,.6)); }
+.card.q .qs { display: block; font-size: 11px; font-weight: 900; color: #fff; margin-top: 6px; line-height: 1.4; }
+.card.q .ttl { color: var(--text-dim); }
+
+/* 詳細 */
+.ribbon { background: var(--grad); }
+.slider .count { background: rgba(0,0,0,.7); color: #fff; }
+.thumbs button.on { border-color: var(--g3); box-shadow: 0 0 0 2px var(--g3) inset; }
+.pricebig { background: #111; color: #fff; border: 3px solid transparent;
+  background: linear-gradient(#111, #111) padding-box, var(--grad) border-box; box-shadow: 4px 4px 0 var(--g4); }
+.pricebig .y { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pricebig .per { color: #fff; }
+.pricebig .unit { background: var(--grad); color: #fff; }
+.block h3 { color: var(--g1); background: #111; }
+.block h3::after { content: ""; display: block; height: 3px; margin: 7px -18px -7px; background: var(--grad); }
+.secttl { color: var(--g1); }
+.hostcard { box-shadow: 4px 4px 0 var(--g3); }
+.hostcard .go { color: var(--g3); }
+.ava { background: var(--grad-d); color: #fff; }
+.map .pin { color: var(--g3); }
+.unitline b { background: var(--grad); color: #fff; border-color: transparent; }
+.chip { background: var(--grad); color: #fff; border-color: transparent; }
+.suggest button.on, .suggest .on { background: var(--grad); color: #fff; }
+
+/* 固定バー・タブ */
+.buybar { border-top: 3px solid transparent; border-image: var(--grad) 1; background: #0A0A0F; }
+.bigbtn { background: var(--grad); color: #fff; border-color: transparent; box-shadow: 0 0 18px rgba(255,62,157,.45), 4px 4px 0 #000; }
+.bigbtn.red { background: linear-gradient(90deg, var(--g3), var(--g4)); }
+.bigbtn.quiet { background: #fff; color: #111; box-shadow: none; }
+nav.tabs { border-top: 3px solid transparent; border-image: var(--grad) 1; background: #0A0A0F; }
+nav.tabs button[aria-selected="true"] { color: var(--g2); }
+nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
+
+/* 取引：やり取り中は本物の赤（先方指定）。支払い済みは青のまま */
+.deal .st, .lg.red { background: var(--red-true); }
+.deal .st.paid, .lg.blue { background: #1E6BFF; }
+.chat-head .st { background: var(--red-true) !important; }
+.deal { box-shadow: 4px 4px 0 var(--g4); }
+.msg.me .bub { background: var(--grad); color: #fff; border-color: transparent; }
+.msg.sys .bub { background: #111; color: var(--g1); border-color: var(--g1); }
+.punch li.done::before, .punch li.now::before { background: var(--g2); }
+.punch li.done::after { background: var(--g2); border-color: var(--g2); }
+.punch li.now { color: var(--g1); } .punch li.now::after { background: var(--g3); border-color: var(--g1); }
+.chat-strip .when { color: var(--g1); }
+.done-btn { background: var(--grad); color: #fff; }
+.chatbar .send { background: var(--grad); color: #fff; }
+
+/* 出品・マイページ・その他のボタン */
+.submit { background: var(--grad); color: #fff; border-color: transparent; }
+.field input:focus, .field textarea:focus, .field select:focus { box-shadow: 3px 3px 0 var(--g3); }
+.menu button, .mp-menu button { box-shadow: 4px 4px 0 var(--g4); }
+.menu .badge, .mp-menu .badge { background: var(--red-true); }
+.photos .ph.main { border-color: var(--g3); }
+.avatarpick .big { background: var(--grad-d); color: #fff; }
+.mode-pick button[aria-pressed="true"], .settings button[aria-pressed="true"] { background: var(--grad); color: #fff; }
+:focus-visible { outline-color: var(--g3); }
+.cal-legend i { background: var(--g2); }
 </style>
 </head>
 <body>
@@ -589,7 +726,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
     <div class="brand">
       <div class="inner">
         <span class="logo pop">timely</span>
-        <span class="tag">自分の時間を、売ろう。<b>30分から</b></span>
+        <span class="tag">自分の時間を、売ろう。<b>1分単位で</b></span>
       </div>
     </div>
 
@@ -661,37 +798,27 @@ nav.tabs .ico { width: 23px; height: 23px; }
     </div>
 
     <div class="dtl-h"><h2 class="pop">30分、なんでもない話をしませんか</h2></div>
-    <div class="pricebig"><span class="y num">¥1,500</span><span class="per">/ 30分</span></div>
+    <div class="pricebig"><span class="y num">¥1,500</span><span class="per">/ 30分</span><span class="unit">1分あたり ¥50</span></div>
     <div class="sortline" style="padding-top:12px">
       <span class="star">★ 4.8</span>（32件）　　<span class="sticker" style="transform:none">1.2km</span>　　渋谷区
     </div>
 
-    <button class="hostcard" data-go="host">
-      <div class="top">
-        <div class="ava">桜</div>
-        <div>
-          <div class="nm">さくら<small>｜話し相手・きき役</small></div>
-          <div class="meta"><span class="star">★★★★★ 4.8</span>（32）　<span class="ok">✔ 本人確認済</span></div>
-          <div class="meta">最終ログイン：2日前　渋谷区</div>
-        </div>
-      </div>
-      <div class="intro">はじめまして、さくらです。カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。</div>
-      <div class="go">出品者のページを見る ▸</div>
-    </button>
 
-    <div class="block" id="avail-item">
-      <h3 class="pop">空いている時間</h3>
-      <div class="avail-head">日程の調整は不要です。<b>空いている枠から選んで</b>そのまま購入できます</div>
-      <div class="week" data-week></div>
-      <div class="slots" data-slots data-limit="4"></div>
-      <button class="more" data-go="when">ほかの時間も見る ▾</button>
+
+    <div class="block">
+      <h3 class="pop">商品の説明</h3>
+      <p>喫茶店で30分、ゆっくりお話しします。<br>
+        仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。<br>
+        待ち合わせの場所と日時は、ご購入のあとメッセージで決めさせてください。</p>
     </div>
 
     <div class="block">
-      <h3 class="pop">内容</h3>
-      <p>喫茶店で30分、ゆっくりお話しします。<br>
-        仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。<br>
-        待ち合わせの場所と時間は、ご購入のあとメッセージで決めさせてください。</p>
+      <h3 class="pop">商品の情報</h3>
+      <div class="row"><span class="k">カテゴリ</span><span>話し相手</span></div>
+      <div class="row"><span class="k">時間</span><span>30分（1分あたり ¥50）</span></div>
+      <div class="row"><span class="k">対応できる時間帯</span><span>平日 19時〜22時／土日 10時〜18時</span></div>
+      <div class="row"><span class="k">日程の決め方</span><span>ご購入のあと、メッセージで</span></div>
+      <div class="row"><span class="k">取り消し</span><span>前日まで無料。それ以降は料金の50%</span></div>
     </div>
 
     <div class="block">
@@ -716,6 +843,20 @@ nav.tabs .ico { width: 23px; height: 23px; }
       <p class="maplabel">出品者様がご指定になった場所と、現在地のみを表示します。ご自宅など、ご指定のない場所は表示いたしません。</p>
     </div>
 
+    <h3 class="pop secttl">出品者</h3>
+    <button class="hostcard" data-go="host">
+      <div class="top">
+        <div class="ava">桜</div>
+        <div>
+          <div class="nm">さくら<small>｜話し相手・きき役</small></div>
+          <div class="meta"><span class="star">★★★★★ 4.8</span>（32）　<span class="ok">✔ 本人確認済</span></div>
+          <div class="meta">最終ログイン：2日前　渋谷区</div>
+        </div>
+      </div>
+      <div class="intro">はじめまして、さくらです。カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。</div>
+      <div class="go">出品者のページを見る ▸</div>
+    </button>
+
     <div class="block">
       <h3 class="pop">レビュー　★4.8（32件）</h3>
       <div class="rv"><div class="ava" style="width:34px;height:34px;font-size:14px">り</div>
@@ -730,27 +871,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
     </div>
 
     <p class="hint">上の大きな画像は横にスライドできます。下の小さな画像を押すと、その画像に切り替わります。<br>
-      詳しい条件は、ご購入のあとのメッセージでやり取りしていただく形です。</p>
-  </section>
-
-  <!-- ============ 日程を選ぶ ============ -->
-  <section class="screen" id="when" hidden>
-    <button class="back" data-go="item">
-      <svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      もどる
-    </button>
-
-    <h2 class="pop" style="font-size:24px;margin:6px 2px 4px">日程を選ぶ</h2>
-    <div class="sortline" style="padding:0 2px 12px">30分、なんでもない話をしませんか　<span class="num" style="color:var(--yel)">¥1,500</span> / 30分</div>
-
-    <div class="block">
-      <h3 class="pop">空いている時間</h3>
-      <div class="avail-head">日にちを選ぶと、その日の空き枠が並びます</div>
-      <div class="week" data-week></div>
-      <div class="slots" data-slots></div>
-    </div>
-
-    <p class="hint">枠の「購入画面に進む」を押すと、その時間で購入の確認に進みます。</p>
+      日程と待ち合わせの場所は、ご購入のあとのメッセージで決めていただく形です。</p>
   </section>
 
   <!-- ============ 出品者の画面 ============ -->
@@ -770,7 +891,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
     <div class="actions">
       <button type="button" class="follow" id="followbtn">＋ フォロー</button>
-      <button type="button" data-sample-msg="ブロックすると、この出品者の券が一覧に出なくなります。">⊘ ブロック</button>
+      <button type="button" data-sample-msg="ブロックすると、この出品者の商品が一覧に出なくなります。">⊘ ブロック</button>
       <button type="button" data-sample-msg="通報は運営に届きます。内容を確認して対応します。">⚑ 通報</button>
     </div>
 
@@ -790,7 +911,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
     </div>
 
     <div class="block">
-      <h3 class="pop">出品中の券</h3>
+      <h3 class="pop">出品中の商品</h3>
       <div class="minirow">
         <button class="mini" data-go="item"><div class="sh"><img src="img/t1.png" alt=""></div><div class="b"><div class="t">30分、なんでもない話をしませんか</div><div class="y">¥1,500<small> / 30分</small></div></div></button>
         <button class="mini" data-go="item"><div class="sh"><img src="img/t3.png" alt=""></div><div class="b"><div class="t">本屋を一緒にまわりましょう</div><div class="y">¥2,000<small> / 60分</small></div></div></button>
@@ -822,8 +943,8 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
   <!-- ============ 出品する ============ -->
   <section class="screen" id="sell" hidden>
-    <h2 class="pop" style="font-size:24px;margin:16px 2px 4px">券を出品する</h2>
-    <div class="sortline" style="padding:0 2px 10px">自分の時間を、券にして売ります</div>
+    <h2 class="pop" style="font-size:24px;margin:16px 2px 4px">商品を出品する</h2>
+    <div class="sortline" style="padding:0 2px 10px">メルカリの出品と同じ流れです。写真 → 商品名 → カテゴリ → 説明 → 価格の順に入れます</div>
 
     <div class="block">
       <h3 class="pop">写真</h3>
@@ -834,13 +955,17 @@ nav.tabs .ico { width: 23px; height: 23px; }
         <div class="ph">＋<br>追加</div>
         <div class="ph">＋<br>追加</div>
       </div>
-      <p class="maplabel">大きい枠がメインの写真です。一覧と詳細で最初に表示されます。</p>
+      <p class="maplabel">大きい枠がメインの写真です。一覧と詳細で最初に表示されます。最大10枚。</p>
     </div>
 
     <div class="block">
-      <h3 class="pop">券の内容</h3>
-      <label class="field"><span>タイトル<b>必須</b></span><input value="30分、なんでもない話をしませんか"></label>
-      <label class="field"><span>カテゴリ<b>必須</b></span>
+      <h3 class="pop">商品名</h3>
+      <label class="field" style="margin-top:0"><span>商品名<b>必須</b></span><input value="30分、なんでもない話をしませんか"></label>
+    </div>
+
+    <div class="block">
+      <h3 class="pop">カテゴリ</h3>
+      <label class="field" style="margin-top:0"><span>カテゴリ<b>必須</b></span>
         <select><option>話し相手</option><option>相談</option><option>教える</option><option>作業</option><option>その他</option></select></label>
       <div class="field"><span>タグ</span>
         <div class="tagbox">
@@ -853,34 +978,32 @@ nav.tabs .ico { width: 23px; height: 23px; }
         </div>
         <p class="tagnote">さがす画面の検索で使われます。5つまで。</p>
       </div>
-      <div class="two">
-        <label class="field"><span>時間<b>必須</b></span>
-          <select><option>30分</option><option>45分</option><option>60分</option><option>90分</option></select></label>
-        <label class="field"><span>価格（円）<b>必須</b></span><input value="1500" inputmode="numeric"></label>
-      </div>
-      <label class="field"><span>説明</span>
-        <textarea rows="5">喫茶店で30分、ゆっくりお話しします。
-仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。
-待ち合わせの場所と時間は、ご購入のあとメッセージで決めさせてください。</textarea></label>
     </div>
 
     <div class="block">
-      <h3 class="pop">待ち合わせのあたり</h3>
-      <label class="field"><span>場所<b>必須</b></span><input value="渋谷駅 ハチ公口のあたり"></label>
+      <h3 class="pop">商品の説明</h3>
+      <label class="field" style="margin-top:0"><span>説明<b>必須</b></span>
+        <textarea rows="5">喫茶店で30分、ゆっくりお話しします。
+仕事の愚痴でも、最近見た映画の話でも構いません。聞き役でも、話し役でも大丈夫です。
+待ち合わせの場所と日時は、ご購入のあとメッセージで決めさせてください。</textarea></label>
+      <label class="field"><span>対応できる時間帯<b>必須</b></span><input value="平日 19時〜22時／土日 10時〜18時"></label>
+      <p class="maplabel">日程は、ご購入のあとメッセージで決めます。ここには「だいたいこの時間帯なら」を書いてください。</p>
+      <label class="field"><span>待ち合わせのあたり<b>必須</b></span><input value="渋谷駅 ハチ公口のあたり"></label>
       <p class="maplabel">地図には、ここで指定した場所だけが表示されます。ご自宅の住所は入れないでください。</p>
     </div>
 
     <div class="block">
-      <h3 class="pop">空いている時間</h3>
-      <div class="cal-nav">
-        <button type="button" data-calweek="-1">‹ 前の一週間</button>
-        <span class="ym" id="cal-ym"></span>
-        <button type="button" data-calweek="1">次の一週間 ›</button>
+      <h3 class="pop">時間と価格</h3>
+      <div class="two" style="margin-top:0">
+        <label class="field" style="margin-top:0"><span>何分のサービスか<b>必須</b></span>
+          <span class="withunit"><input id="sell-min" value="30" inputmode="numeric"><em>分</em></span></label>
+        <label class="field" style="margin-top:0"><span>価格<b>必須</b></span>
+          <span class="withunit"><em class="l">¥</em><input id="sell-yen" value="1500" inputmode="numeric"></span></label>
       </div>
-      <table class="cal" id="cal"></table>
-      <div class="cal-legend"><span><i></i>空いている</span><span><i class="x"></i>休み</span></div>
-      <p class="maplabel">升目を押すと ○ と × が切り替わります。日付を押すと、その日をまとめて切り替えられます。<br>
-        ここで○にした枠が、購入する方に「空いている時間」として見えます。</p>
+      <div class="unitline">1分あたり <b id="sell-unit">¥50</b>　<small>一覧と詳細に表示されます</small></div>
+      <div class="feeline"><span>運営の手数料（20%）</span><span id="sell-fee">¥300</span></div>
+      <div class="feeline"><span>あなたの受け取り</span><b id="sell-net">¥1,200</b></div>
+      <p class="maplabel">時間は1分単位で決められます。価格は、その時間ぶんの合計です。</p>
     </div>
 
     <div class="block">
@@ -903,7 +1026,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
       もどる
     </button>
     <h2 class="pop" style="font-size:24px;margin:4px 2px 4px">プロフィール</h2>
-    <div class="sortline" style="padding:0 2px 10px">券の詳細と、出品者のページに表示されます</div>
+    <div class="sortline" style="padding:0 2px 10px">商品の詳細と、出品者のページに表示されます</div>
 
     <div class="block">
       <h3 class="pop">写真とお名前</h3>
@@ -922,7 +1045,9 @@ nav.tabs .ico { width: 23px; height: 23px; }
 カフェでのんびり話すのが好きです。仕事の愚痴、趣味の話、なんでも。
 聞き役が得意ですが、話すのも好きです。休みの日は本屋と喫茶店をはしごしています。
 渋谷・新宿・下北沢のあたりでお会いできます。</textarea></label>
-      <p class="maplabel">最初の3行が、券の詳細に表示されます。</p>
+      <p class="maplabel">最初の3行が、商品の詳細に表示されます。</p>
+      <label class="field"><span>対応できる時間帯</span><input value="平日 19時〜22時／土日 10時〜18時"></label>
+      <p class="maplabel">商品ごとに書かない場合は、こちらが表示されます。</p>
     </div>
 
     <div class="block">
@@ -934,7 +1059,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
     <div class="danger">
       <button type="button" data-sample-msg="ログアウトします（サンプルのため、実際には何も起きません）。">ログアウト</button>
-      <button type="button" class="quit" data-sample-msg="退会の手続きに進みます。取引中の券がある場合は、完了してからになります。">退会</button>
+      <button type="button" class="quit" data-sample-msg="退会の手続きに進みます。取引中の商品がある場合は、完了してからになります。">退会</button>
     </div>
     <p class="hint">サンプルのため、入力した内容は保存されません。</p>
   </section>
@@ -992,7 +1117,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
     <div class="block">
       <h3 class="pop">表示について</h3>
-      <p>出品者のページと券の詳細に「✔ 本人確認済」と表示されます。<br>
+      <p>出品者のページと商品の詳細に「✔ 本人確認済」と表示されます。<br>
         お名前や書類の内容は、購入する方には表示されません。</p>
     </div>
     <p class="hint">書類の再提出が必要になった場合は、ここにご案内が表示されます。</p>
@@ -1015,7 +1140,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
     <div class="block">
       <h3 class="pop">今月の売上（9月）</h3>
-      <div class="row"><span class="k">売れた券</span><span>8件</span></div>
+      <div class="row"><span class="k">売れた商品</span><span>8件</span></div>
       <div class="row"><span class="k">売上の合計</span><span class="num">¥30,000</span></div>
       <div class="row"><span class="k">運営の手数料（20%）</span><span class="num">− ¥6,000</span></div>
       <div class="row total"><span>お受け取り</span><span class="v num">¥24,000</span></div>
@@ -1142,7 +1267,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
         <button type="button" data-mode="dark" aria-pressed="true">ブラック</button>
         <button type="button" data-mode="light" aria-pressed="false">ホワイト</button>
       </div>
-      <div class="swatch"><div class="b">黒地に黄</div><div class="w">明るい地に黒</div></div>
+      <div class="swatch"><div class="b">黒地にサンセット色</div><div class="w">明るい地に黒</div></div>
     </div>
     <p class="hint">この試作では、いちばん上の帯にある切り替えと同じ働きをします。</p>
   </section>
@@ -1180,14 +1305,14 @@ nav.tabs .ico { width: 23px; height: 23px; }
   <!-- ============ 取引の一覧 ============ -->
   <section class="screen" id="deals" hidden>
     <h2 class="pop" style="font-size:24px;margin:16px 2px 4px">取引</h2>
-    <div class="sortline" style="padding:0 2px 12px">購入した券・売れた券のやり取りです</div>
+    <div class="sortline" style="padding:0 2px 12px">購入した商品・売れた商品のやり取りです</div>
 
     <div class="deals">
       <button class="deal" data-go="chat">
         <div class="ava">桜</div>
         <div>
           <div class="nm">さくら <span class="st">やり取り中</span></div>
-          <div class="tk">30分、なんでもない話をしませんか　9/15（火）10:30〜</div>
+          <div class="tk">30分、なんでもない話をしませんか　9/15（火）10:30〜（メッセージで決定）</div>
           <div class="last">承知しました。当日はハチ公口の改札を出たところでお待ちしています。</div>
         </div>
         <div class="right"><span class="time">10:41</span><span class="unread">1</span></div>
@@ -1212,7 +1337,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
       </button>
     </div>
 
-    <p class="hint">見た目のサンプルです。文字だけのやり取りで、写真やファイルの送信はありません。</p>
+    <p class="hint">色は状態を表します。<span class="lg red">やり取り中</span> <span class="lg green">完了</span> <span class="lg blue">支払い済み</span><br>文字だけのやり取りで、写真やファイルの送信はありません。</p>
   </section>
 
   <!-- ============ チャットの詳細 ============ -->
@@ -1223,7 +1348,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
       </button>
       <div class="ava" style="width:40px;height:40px;font-size:16px">桜</div>
       <div class="who">
-        <div class="nm">さくら <span class="st" style="font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;border:2px solid #111;background:var(--yel);color:#111">やり取り中</span></div>
+        <div class="nm">さくら <span class="st" style="font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;border:2px solid #111;background:var(--red);color:#fff">やり取り中</span></div>
         <div class="tk">30分、なんでもない話をしませんか</div>
       </div>
     </div>
@@ -1263,7 +1388,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
     <div class="block">
       <h3 class="pop">ご購入の内容</h3>
       <div class="row"><span>30分、なんでもない話をしませんか</span><span class="num">¥1,500</span></div>
-      <div class="row"><span class="k">日時</span><span class="num" id="buy-when">9/11（金）09:00〜09:30</span></div>
+      <div class="row"><span class="k">日程</span><span>ご購入のあと、メッセージで決めます</span></div>
       <div class="row"><span class="k">出品者</span><span>さくら</span></div>
       <div class="row total"><span>お支払い金額</span><span class="v num">¥1,500</span></div>
     </div>
@@ -1307,6 +1432,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
   </div>
 </div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="tabgrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9A3D"/><stop offset=".5" stop-color="#FF3E9D"/><stop offset="1" stop-color="#9B4DFF"/></linearGradient></defs></svg>
 <nav class="tabs" id="tabs" role="tablist" aria-label="画面">
   <button role="tab" aria-selected="true" data-go="find">
     <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>さがす</button>
@@ -1320,73 +1446,46 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
 <script>
   const ITEMS = [
-    { img:"img/t1.png", cat:"話し相手", tag:"NEW", t:"30分、なんでもない話をしませんか", y:"1,500", per:"30分", st:"4.8", n:"32", km:"1.2km" },
-    { img:"img/t2.png", cat:"話し相手", tag:"",    t:"一緒に散歩しながらお話しします",   y:"1,200", per:"40分", st:"4.6", n:"18", km:"1.8km" },
+    { img:"img/t1.png", cat:"話し相手", tag:"NEW", stk:["tre","本日の発掘"], t:"30分、なんでもない話をしませんか", y:"1,500", per:"30分", st:"4.8", n:"32", km:"1.2km" },
+    { img:"img/t2.png", cat:"話し相手", tag:"",    t:"一緒に散歩しながらお話しします",   y:"1,000", per:"25分", st:"4.6", n:"18", km:"1.8km" },
     { img:"img/t3.png", cat:"話し相手", tag:"HOT", t:"読書の感想を語り合いましょう",     y:"1,000", per:"30分", st:"5.0", n:"9",  km:"2.4km" },
+    { q:true, qs:"あと300m<br>近づくと見える", t:"？？？（近づくと見える出品）", km:"1.6km" },
     { img:"img/t4.png", cat:"教える",   tag:"NEW", t:"釣りのコツ、現地でお教えします",   y:"3,000", per:"90分", st:"4.9", n:"44", km:"3.1km" },
     { img:"img/t5.png", cat:"作業",     tag:"",    t:"お部屋の片づけを一緒にやります",   y:"2,500", per:"60分", st:"4.7", n:"51", km:"3.6km" },
     { img:"img/t6.png", cat:"教える",   tag:"",    t:"ギターの持ち方から始めます",       y:"2,000", per:"60分", st:"4.8", n:"26", km:"4.2km" },
     { img:"img/t7.png",  cat:"相談", tag:"NEW", t:"転職の相談、経験者が聞きます",         y:"2,000", per:"45分", st:"4.9", n:"38", km:"1.5km" },
     { img:"img/t8.png",  cat:"相談", tag:"",    t:"引っ越し先の選び方、地元の人が答えます", y:"1,500", per:"30分", st:"4.7", n:"12", km:"2.1km" },
-    { img:"img/t9.png",  cat:"相談", tag:"HOT", t:"子育ての愚痴、聞きます",               y:"1,200", per:"30分", st:"5.0", n:"64", km:"2.6km" },
+    { img:"img/t9.png",  cat:"相談", tag:"HOT", stk:["hot","激レア"], t:"子育ての愚痴、聞きます",               y:"1,200", per:"30分", st:"5.0", n:"64", km:"2.6km" },
+    { q:true, qs:"明日 20:00<br>公開", t:"？？？（明日公開の出品）", km:"2.8km" },
     { img:"img/t10.png", cat:"相談", tag:"",    t:"恋の相談、恋バナ歓迎です",             y:"1,000", per:"30分", st:"4.6", n:"21", km:"2.9km" },
-    { img:"img/t11.png", cat:"相談", tag:"NEW", t:"スマホの設定、一緒に見ます",           y:"1,500", per:"40分", st:"4.8", n:"9",  km:"3.3km" },
+    { img:"img/t11.png", cat:"相談", tag:"NEW", t:"スマホの設定、一緒に見ます",           y:"1,200", per:"20分", st:"4.8", n:"9",  km:"3.3km" },
     { img:"img/t12.png", cat:"相談", tag:"",    t:"お金の使い方、一緒に見直します",       y:"2,500", per:"60分", st:"4.9", n:"17", km:"3.8km" },
     { img:"img/t13.png", cat:"相談", tag:"",    t:"進路の相談、大学生が聞きます",         y:"1,000", per:"30分", st:"4.7", n:"30", km:"4.4km" },
     { img:"img/t14.png", cat:"相談", tag:"HOT", t:"副業の始め方、経験者と話します",       y:"2,000", per:"45分", st:"4.8", n:"45", km:"4.9km" }
   ];
 
   document.getElementById("cards").innerHTML = ITEMS.map(function (i) {
+    if (i.q) {
+      return '<button class="card q" data-sample-msg="近づくと見えるようになる出品です（宝探しの遊び）。サンプルでは開けません。">' +
+        '<span class="shot"><span><span class="qq">???</span><span class="qs">' + i.qs + '</span></span></span>' +
+        '<span class="ttl">' + i.t + '</span><span class="foot">' + i.km + '</span></button>';
+    }
     return '<button class="card" data-go="item">' +
       '<span class="shot"><img src="' + i.img + '" alt="">' +
+        (i.stk ? '<span class="stk ' + i.stk[0] + '">' + i.stk[1] + '</span>' : (i.tag ? '<span class="stk' + (i.tag === 'HOT' ? ' hot' : '') + '">' + i.tag + '</span>' : '')) +
         '<span class="tagprice"><span class="y num">¥' + i.y + '</span><span class="p">/ ' + i.per + '</span></span></span>' +
       '<span class="ttl">' + i.t + '</span>' +
       '<span class="foot"><span class="star">★' + i.st + '</span>(' + i.n + ')　' + i.km + '</span>' +
     '</button>';
   }).join("");
 
-  // ---- 空いている時間（仮のデータ） ----
-  const DAYS = [
-    { d:"11", w:"金", cls:"fri on", n:16 }, { d:"12", w:"土", cls:"sat", n:16 },
-    { d:"13", w:"日", cls:"sun off", n:0 }, { d:"14", w:"月", cls:"", n:12 },
-    { d:"15", w:"火", cls:"", n:16 }, { d:"16", w:"水", cls:"", n:8 }, { d:"17", w:"木", cls:"", n:16 }
-  ];
-  let pickedDay = DAYS[0];
-  let pickedSlot = "09:00";
-
-  function slotsFor(day) {
-    const out = [];
-    for (let h = 9; h < 17; h++) { out.push(pad(h) + ":00〜" + pad(h) + ":30"); out.push(pad(h) + ":30〜" + pad(h + 1) + ":00"); }
-    return out.slice(0, day.n);
-  }
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
-  function label(day, slot) { return "9/" + day.d + "（" + day.w + "）" + slot; }
-
-  function renderAvail() {
-    document.querySelectorAll("[data-week]").forEach(function (w) {
-      w.innerHTML = DAYS.map(function (x) {
-        const on = (x === pickedDay) ? " on" : "";
-        return '<button type="button" class="d ' + x.cls.replace(" on", "") + on + '" data-day="' + x.d + '"' + (x.n === 0 ? ' disabled' : '') + '>' +
-          '<span class="w">' + x.w + '</span><span class="n">' + x.d + '</span>' +
-          '<span class="c">' + (x.n === 0 ? '休' : x.n + '件') + '</span></button>';
-      }).join("");
-    });
-    document.querySelectorAll("[data-slots]").forEach(function (el) {
-      const lim = el.dataset.limit ? Number(el.dataset.limit) : 999;
-      el.innerHTML = slotsFor(pickedDay).slice(0, lim).map(function (t) {
-        return '<div class="slot"><div class="t"><small>9/' + pickedDay.d + '（' + pickedDay.w + '）</small><b>' + t + '</b></div>' +
-          '<button type="button" class="go" data-slot="' + t + '">購入画面に進む</button></div>';
-      }).join("");
-    });
-  }
-  renderAvail();
 
   // ---- カテゴリごとの表示（見出し＋大小のモザイク） ----
   (function () {
     const cats = [];
-    ITEMS.forEach(function (i) { if (cats.indexOf(i.cat) < 0) cats.push(i.cat); });
+    ITEMS.forEach(function (i) { if (!i.q && cats.indexOf(i.cat) < 0) cats.push(i.cat); });
     document.getElementById("view-cat").innerHTML = cats.map(function (c) {
-      const list = ITEMS.filter(function (i) { return i.cat === c; });
+      const list = ITEMS.filter(function (i) { return !i.q && i.cat === c; });
       return '<section class="catsec">' +
         '<div class="h"><span class="t pop">' + c + '</span>' +
         '<button type="button" class="ic-btn" data-sample-msg="カテゴリをお気に入りに入れます。">♡</button>' +
@@ -1452,31 +1551,20 @@ nav.tabs .ico { width: 23px; height: 23px; }
   });
   document.addEventListener("click", function (e) { if (!e.target.closest(".tagbox")) suggest.hidden = true; });
 
-  // ---- 空き時間のカレンダー（週ごと、○×を切り替える） ----
-  const CAL_TIMES = []; for (let h = 9; h < 18; h++) { CAL_TIMES.push(pad(h) + ":00"); CAL_TIMES.push(pad(h) + ":30"); }
-  let calStart = new Date(2026, 8, 14);           // 9/14（月）の週から
-  const calOff = {};                              // "9/13-09:00": true なら休み
-  const WD = ["日","月","火","水","木","金","土"];
-  function calKey(d, t) { return (d.getMonth() + 1) + "/" + d.getDate() + "-" + t; }
-  function isOff(d, t) { const k = calKey(d, t); if (k in calOff) return calOff[k]; return d.getDay() === 0; }
-  function renderCal() {
-    const days = []; for (let i = 0; i < 7; i++) { const d = new Date(calStart); d.setDate(calStart.getDate() + i); days.push(d); }
-    document.getElementById("cal-ym").textContent = (days[0].getFullYear()) + "年" + (days[0].getMonth() + 1) + "月";
-    let html = "<thead><tr><th style='background:none'></th>" + days.map(function (d) {
-      const allOff = CAL_TIMES.every(function (t) { return isOff(d, t); });
-      return "<th class='" + (d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : "") + (allOff ? " off" : "") + "' data-day-toggle='" + calKey(d, "") + "'>" +
-        "<span class='d'>" + d.getDate() + "</span>" + WD[d.getDay()] + "</th>";
-    }).join("") + "</tr></thead><tbody>";
-    CAL_TIMES.forEach(function (t) {
-      html += "<tr><td class='t'>" + t + "</td>" + days.map(function (d) {
-        const off = isOff(d, t);
-        return "<td class='c'><button type='button' class='" + (off ? "off" : "on") + "' data-cell='" + calKey(d, t) + "'>" + (off ? "×" : "○") + "</button></td>";
-      }).join("") + "</tr>";
-    });
-    document.getElementById("cal").innerHTML = html + "</tbody>";
-  }
-  renderCal();
 
+  // ---- 出品：1分あたり・手数料・受け取りの自動計算 ----
+  function calcSell() {
+    const m = Math.max(1, parseInt(document.getElementById("sell-min").value, 10) || 0);
+    const y = Math.max(0, parseInt(document.getElementById("sell-yen").value, 10) || 0);
+    const fmt = function (n) { return "¥" + n.toLocaleString("ja-JP"); };
+    document.getElementById("sell-unit").textContent = fmt(Math.round(y / m));
+    document.getElementById("sell-fee").textContent = fmt(Math.round(y * 0.2));
+    document.getElementById("sell-net").textContent = fmt(y - Math.round(y * 0.2));
+  }
+  ["sell-min", "sell-yen"].forEach(function (id) { document.getElementById(id).addEventListener("input", calcSell); });
+  calcSell();
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
   const screens = document.querySelectorAll(".screen");
   const tabs = document.querySelectorAll("nav.tabs button");
   const buybar = document.getElementById("buybar");
@@ -1484,7 +1572,7 @@ nav.tabs .ico { width: 23px; height: 23px; }
 
   function show(id) {
     screens.forEach(function (s) { s.hidden = (s.id !== id); });
-    const tabOf = { find: "find", item: "find", when: "find", buy: "find", host: "find", sell: "sell",
+    const tabOf = { find: "find", item: "find", buy: "find", host: "find", sell: "sell",
                     mypage: "mypage", profile: "mypage", verify: "mypage", sales: "mypage", terms: "mypage", contact: "mypage",
                     notices: "mypage", notice: "mypage", settings: "mypage",
                     deals: "deals", chat: "deals" };
@@ -1496,9 +1584,8 @@ nav.tabs .ico { width: 23px; height: 23px; }
     if (bar) {
       mainbtn.textContent = (id === "item") ? "購入に進む" : "¥1,500 を支払う";
       mainbtn.classList.toggle("red", id === "buy");
-      mainbtn.dataset.go = (id === "item") ? "when" : "";
+      mainbtn.dataset.go = (id === "item") ? "buy" : "";
     }
-    if (id === "buy") { document.getElementById("buy-when").textContent = label(pickedDay, pickedSlot); }
     if (id === "item") { slides.scrollTo({ left: 0 }); markSlide(0); }
     if (id === "notice") { const n = document.querySelector('#notices .notice[data-go="notice"]'); n.classList.add("read"); const d = n.querySelector(".dot"); if (d) d.remove(); }
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -1517,15 +1604,6 @@ nav.tabs .ico { width: 23px; height: 23px; }
     const un = ev.target.closest("[data-untag]");
     if (un) { un.parentElement.remove(); return; }
 
-    const cell = ev.target.closest("[data-cell]");
-    if (cell) { const k = cell.dataset.cell; const parts = k.split("-"); const d = new Date(2026, Number(parts[0].split("/")[0]) - 1, Number(parts[0].split("/")[1]));
-      calOff[k] = !isOff(d, parts[1]); renderCal(); return; }
-    const dt = ev.target.closest("[data-day-toggle]");
-    if (dt) { const md = dt.dataset.dayToggle.replace(/-$/, ""); const d = new Date(2026, Number(md.split("/")[0]) - 1, Number(md.split("/")[1]));
-      const allOff = CAL_TIMES.every(function (t) { return isOff(d, t); });
-      CAL_TIMES.forEach(function (t) { calOff[calKey(d, t)] = !allOff; }); renderCal(); return; }
-    const wk = ev.target.closest("[data-calweek]");
-    if (wk) { calStart.setDate(calStart.getDate() + 7 * Number(wk.dataset.calweek)); renderCal(); return; }
 
     const view = ev.target.closest("[data-view]");
     if (view) {
@@ -1540,10 +1618,6 @@ nav.tabs .ico { width: 23px; height: 23px; }
       slides.scrollTo({ left: idx * slides.clientWidth, behavior: "smooth" });
       markSlide(idx); return;
     }
-    const day = ev.target.closest("[data-day]");
-    if (day) { pickedDay = DAYS.find(function (x) { return x.d === day.dataset.day; }); renderAvail(); return; }
-    const slot = ev.target.closest("[data-slot]");
-    if (slot) { pickedSlot = slot.dataset.slot; show("buy"); return; }
 
     const go = ev.target.closest("[data-go]");
     if (go && go.dataset.go) { show(go.dataset.go); return; }
