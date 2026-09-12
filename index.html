@@ -650,6 +650,25 @@ nav.tabs .ico { width: 23px; height: 23px; }
   -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 8px rgba(255,62,157,.6)); }
 .card.q .qs { display: block; font-size: 11px; font-weight: 900; color: #fff; margin-top: 6px; line-height: 1.4; }
 .card.q .ttl { color: var(--text-dim); }
+/* 一覧のモザイク（0912夜：1件目を大きく、残りを小さく） */
+.mosaic .m .pr { background: #111; color: #fff; border: 2px solid var(--g3); font-size: 12px; padding: 2px 8px; border-radius: 6px; left: auto; right: 6px; bottom: 6px; }
+.mosaic .m .pr small { font-family: "Zen Kaku Gothic New"; font-weight: 900; font-size: 9px; margin-left: 2px; color: #ddd; }
+.mosaic .m.big .pr { font-size: 18px; padding: 4px 12px; right: 10px; bottom: 10px; border-width: 3px; box-shadow: 3px 3px 0 var(--g4); transform: rotate(-4deg); }
+.mosaic .m.big .pr small { font-size: 11px; }
+.mosaic .m .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 12px 48px; color: #fff;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.78) 55%); }
+.mosaic .m .cap .t { display: block; font-size: 15px; font-weight: 900; line-height: 1.35; }
+.mosaic .m .cap .f { display: block; font-size: 11.5px; font-weight: 700; color: #ddd; margin-top: 2px; }
+.mosaic .m .stk { left: -6px; top: auto; bottom: 50px; font-size: 11px; padding: 3px 10px 3px 12px; }
+.mosaic .m.big .stk { font-size: 13px; top: 44%; bottom: auto; }
+.mosaic .m.q { display: grid; place-items: center; text-align: center; border-style: dashed;
+  background: repeating-linear-gradient(-45deg, #141219 0 8px, #201c2b 8px 16px) padding-box, var(--grad-d) border-box; }
+.mosaic .m.q .qin { display: grid; justify-items: center; }
+.mosaic .m.q .qq { display: block; font-family: "Dela Gothic One"; font-size: 26px; line-height: 1; background: var(--grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 8px rgba(255,62,157,.6)); }
+.mosaic .m.big.q .qq { font-size: 44px; }
+.mosaic .m.q .qs { display: block; font-size: 9.5px; font-weight: 900; color: #fff; margin-top: 4px; line-height: 1.35; }
+.mosaic .m.big.q .qs { font-size: 12px; }
 
 /* 詳細 */
 .ribbon { background: var(--grad); }
@@ -726,7 +745,6 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
     <div class="brand">
       <div class="inner">
         <span class="logo pop">timely</span>
-        <span class="tag">自分の時間を、売ろう。<b>1分単位で</b></span>
       </div>
     </div>
 
@@ -747,6 +765,7 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
       <button type="button" aria-pressed="false">相談</button>
       <button type="button" aria-pressed="false">教える</button>
       <button type="button" aria-pressed="false">作業</button>
+      <button type="button" aria-pressed="false">活動</button>
       <button type="button" aria-pressed="false">その他</button>
     </div>
 
@@ -765,7 +784,8 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
 
     <div id="view-cat" hidden></div>
 
-    <p class="hint">カテゴリの名前は仮のものです。実際に扱われる内容が固まりましたら入れ替えます。<br>
+    <p class="hint">最初の1件を大きく、残りを小さく並べています。6件ごとに大きい枠が左右入れ替わります。<br>
+      カテゴリの名前は仮のものです。実際に扱われる内容が固まりましたら入れ替えます。<br>
       距離は、現在地と出品者様がご指定になった場所から計算します。</p>
   </section>
 
@@ -966,7 +986,7 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
     <div class="block">
       <h3 class="pop">カテゴリ</h3>
       <label class="field" style="margin-top:0"><span>カテゴリ<b>必須</b></span>
-        <select><option>話し相手</option><option>相談</option><option>教える</option><option>作業</option><option>その他</option></select></label>
+        <select><option>話し相手</option><option>相談</option><option>教える</option><option>作業</option><option>活動</option><option>その他</option></select></label>
       <div class="field"><span>タグ</span>
         <div class="tagbox">
           <div class="tagwrap" id="tagwrap">
@@ -1447,10 +1467,10 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
 <script>
   const ITEMS = [
     { img:"img/t1.png", cat:"話し相手", tag:"NEW", stk:["tre","本日の発掘"], t:"30分、なんでもない話をしませんか", y:"1,500", per:"30分", st:"4.8", n:"32", km:"1.2km" },
-    { img:"img/t2.png", cat:"話し相手", tag:"",    t:"一緒に散歩しながらお話しします",   y:"1,000", per:"25分", st:"4.6", n:"18", km:"1.8km" },
+    { img:"img/t2.png", cat:"活動",     tag:"",    t:"一緒に散歩しながらお話しします",   y:"1,000", per:"25分", st:"4.6", n:"18", km:"1.8km" },
     { img:"img/t3.png", cat:"話し相手", tag:"HOT", t:"読書の感想を語り合いましょう",     y:"1,000", per:"30分", st:"5.0", n:"9",  km:"2.4km" },
     { q:true, qs:"あと300m<br>近づくと見える", t:"？？？（近づくと見える出品）", km:"1.6km" },
-    { img:"img/t4.png", cat:"教える",   tag:"NEW", t:"釣りのコツ、現地でお教えします",   y:"3,000", per:"90分", st:"4.9", n:"44", km:"3.1km" },
+    { img:"img/t4.png", cat:"活動",     tag:"NEW", t:"釣りのコツ、現地でお教えします",   y:"3,000", per:"90分", st:"4.9", n:"44", km:"3.1km" },
     { img:"img/t5.png", cat:"作業",     tag:"",    t:"お部屋の片づけを一緒にやります",   y:"2,500", per:"60分", st:"4.7", n:"51", km:"3.6km" },
     { img:"img/t6.png", cat:"教える",   tag:"",    t:"ギターの持ち方から始めます",       y:"2,000", per:"60分", st:"4.8", n:"26", km:"4.2km" },
     { img:"img/t7.png",  cat:"相談", tag:"NEW", t:"転職の相談、経験者が聞きます",         y:"2,000", per:"45分", st:"4.9", n:"38", km:"1.5km" },
@@ -1461,10 +1481,37 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
     { img:"img/t11.png", cat:"相談", tag:"NEW", t:"スマホの設定、一緒に見ます",           y:"1,200", per:"20分", st:"4.8", n:"9",  km:"3.3km" },
     { img:"img/t12.png", cat:"相談", tag:"",    t:"お金の使い方、一緒に見直します",       y:"2,500", per:"60分", st:"4.9", n:"17", km:"3.8km" },
     { img:"img/t13.png", cat:"相談", tag:"",    t:"進路の相談、大学生が聞きます",         y:"1,000", per:"30分", st:"4.7", n:"30", km:"4.4km" },
-    { img:"img/t14.png", cat:"相談", tag:"HOT", t:"副業の始め方、経験者と話します",       y:"2,000", per:"45分", st:"4.8", n:"45", km:"4.9km" }
+    { img:"img/t14.png", cat:"相談", tag:"HOT", t:"副業の始め方、経験者と話します",       y:"2,000", per:"45分", st:"4.8", n:"45", km:"4.9km" },
+    { img:"img/t15.png", cat:"活動",   tag:"NEW", t:"朝ラン、一緒に走ります",               y:"800",   per:"40分", st:"4.9", n:"7",  km:"2.2km" },
+    { img:"img/t16.png", cat:"その他", tag:"",    t:"犬の散歩、代わりに行きます",           y:"1,000", per:"30分", st:"4.8", n:"23", km:"1.9km" },
+    { img:"img/t17.png", cat:"その他", tag:"HOT", t:"スマホで写真、撮ります",               y:"1,500", per:"20分", st:"4.7", n:"15", km:"3.4km" }
   ];
 
-  document.getElementById("cards").innerHTML = ITEMS.map(function (i) {
+  // タイル1枚。big=大きい枠（題名・★・距離つき）。q=伏せカード
+  function tile(i, cls) {
+    if (i.q) {
+      return '<button class="m q' + cls + '" data-sample-msg="近づくと見えるようになる出品です（宝探しの遊び）。サンプルでは開けません。">' +
+        '<span class="qin"><span class="qq">???</span><span class="qs">' + i.qs + '</span></span></button>';
+    }
+    const stk = i.stk ? '<span class="stk ' + i.stk[0] + '">' + i.stk[1] + '</span>'
+              : (i.tag ? '<span class="stk' + (i.tag === 'HOT' ? ' hot' : '') + '">' + i.tag + '</span>' : '');
+    const big = cls.indexOf('big') >= 0;
+    return '<button class="m' + cls + '" data-go="item">' +
+      '<img src="' + i.img + '" alt="">' + stk +
+      (big ? '<span class="cap"><span class="t">' + i.t + '</span><span class="f"><span class="star">★' + i.st + '</span>（' + i.n + '）　' + i.km + '</span></span>' : '') +
+      '<span class="pr">¥' + i.y + '<small>/' + i.per + '</small></span>' +
+    '</button>';
+  }
+  function mosaic(list) {
+    return list.map(function (i, idx) {
+      const blk = Math.floor(idx / 6), pos = idx % 6;
+      return tile(i, (pos === 0) ? (blk % 2 === 0 ? ' big' : ' big r') : '');
+    }).join('');
+  }
+  document.getElementById("cards").className = "mosaic";
+  document.getElementById("cards").innerHTML = mosaic(ITEMS);
+  /* 旧・2列カード（0912夜の注釈で並びを変更。残置） */
+  const OLD_CARDS = ITEMS.map(function (i) {
     if (i.q) {
       return '<button class="card q" data-sample-msg="近づくと見えるようになる出品です（宝探しの遊び）。サンプルでは開けません。">' +
         '<span class="shot"><span><span class="qq">???</span><span class="qs">' + i.qs + '</span></span></span>' +
@@ -1482,22 +1529,14 @@ nav.tabs button[aria-selected="true"] .ico { stroke: url(#tabgrad); }
 
   // ---- カテゴリごとの表示（見出し＋大小のモザイク） ----
   (function () {
-    const cats = [];
-    ITEMS.forEach(function (i) { if (!i.q && cats.indexOf(i.cat) < 0) cats.push(i.cat); });
+    const cats = ["話し相手", "相談", "教える", "作業", "活動", "その他"];
     document.getElementById("view-cat").innerHTML = cats.map(function (c) {
       const list = ITEMS.filter(function (i) { return !i.q && i.cat === c; });
       return '<section class="catsec">' +
         '<div class="h"><span class="t pop">' + c + '</span>' +
         '<button type="button" class="ic-btn" data-sample-msg="カテゴリをお気に入りに入れます。">♡</button>' +
         '<button type="button" class="ic-btn" data-sample-msg="このカテゴリをまとめて見る、通報する、などのメニューが開きます。">⋯</button></div>' +
-        '<div class="mosaic">' + list.map(function (i, idx) {
-          const blk = Math.floor(idx / 6), pos = idx % 6;
-          const cls = (pos === 0) ? (blk % 2 === 0 ? ' big' : ' big r') : '';
-          return '<button class="m' + cls + '" data-go="item">' +
-            '<img src="' + i.img + '" alt="">' +
-            (i.tag ? '<span class="new' + (i.tag === 'HOT' ? ' hot' : '') + '">' + i.tag + '</span>' : '') +
-            '<span class="pr">¥' + i.y + '</span></button>';
-        }).join('') + '</div></section>';
+        '<div class="mosaic">' + mosaic(list) + '</div></section>';
     }).join('');
   })();
 
